@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.dto.doctor;
 
+import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentWithoutAnythingResponse;
 import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateWithoutDoctorResponse;
 import lombok.*;
 
@@ -24,4 +25,6 @@ public class DoctorResponse {
     private String city;
 
     private Set<AvailableDateWithoutDoctorResponse> availableDates;
+
+    private Set<AppointmentWithoutAnythingResponse> appointments;
 }
