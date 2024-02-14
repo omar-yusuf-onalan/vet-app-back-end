@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.repository;
+package com.omaryusufonalan.vetappbackend.mapper;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
