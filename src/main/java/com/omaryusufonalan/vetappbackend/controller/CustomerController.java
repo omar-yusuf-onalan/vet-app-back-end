@@ -1,0 +1,37 @@
+package com.omaryusufonalan.vetappbackend.controller;
+
+import com.omaryusufonalan.vetappbackend.dto.customer.CustomerRequest;
+import com.omaryusufonalan.vetappbackend.service.CustomerService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("vet-app/api/v1/customer")
+@RequiredArgsConstructor
+public class CustomerController {
+    private final CustomerService customerService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getResponseById(@PathVariable Long id) {
+        return new ResponseEntity<>(customerService.getResponseById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody CustomerRequest customerRequest) {
+        return new ResponseEntity<>(customerService.create(customerRequest), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody CustomerRequest customerRequest) {
+        return new ResponseEntity<>(customerService.update(id, customerRequest), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        customerService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}
+
