@@ -22,4 +22,6 @@ public class AnimalRequest {
     private String color;
 
     private LocalDate dateOfBirth;
+
+    private CustomerInAnimalRequest customer;
 }
