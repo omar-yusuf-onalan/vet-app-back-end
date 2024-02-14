@@ -1,0 +1,37 @@
+package com.omaryusufonalan.vetappbackend.controller;
+
+
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
+import com.omaryusufonalan.vetappbackend.service.AnimalService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("vet-app/api/v1/animal")
+@RequiredArgsConstructor
+public class AnimalController {
+    private final AnimalService animalService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getResponseById(@PathVariable Long id) {
+        return new ResponseEntity<>(animalService.getResponseById(id), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody AnimalRequest animalRequest) {
+        return new ResponseEntity<>(animalService.create(animalRequest), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody AnimalRequest animalRequest) {
+        return new ResponseEntity<>(animalService.update(id, animalRequest), HttpStatus.ACCEPTED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        animalService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+}
