@@ -1,6 +1,9 @@
 package com.omaryusufonalan.vetappbackend.dto.doctor;
 
+import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateWithoutDoctorResponse;
 import lombok.*;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +22,6 @@ public class DoctorResponse {
     private String address;
 
     private String city;
+
+    private Set<AvailableDateWithoutDoctorResponse> availableDates;
 }
