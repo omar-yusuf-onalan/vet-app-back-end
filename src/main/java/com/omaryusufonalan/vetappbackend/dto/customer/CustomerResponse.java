@@ -1,6 +1,9 @@
 package com.omaryusufonalan.vetappbackend.dto.customer;
 
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalWithoutCustomerResponse;
 import lombok.*;
+
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +22,6 @@ public class CustomerResponse {
     private String address;
 
     private String city;
+
+    private Set<AnimalWithoutCustomerResponse> animals;
 }
