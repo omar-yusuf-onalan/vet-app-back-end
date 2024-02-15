@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class AppointmentService implements GenericCRUD<Appointment, AppointmentRequest, AppointmentResponse> {
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
+    private final AvailableDateService availableDateService;
 
     @Override
     public Appointment getById(Long id) {
