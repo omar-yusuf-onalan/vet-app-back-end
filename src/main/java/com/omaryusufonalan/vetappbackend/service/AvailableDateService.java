@@ -9,6 +9,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class AvailableDateService implements GenericCRUD<AvailableDate, AvailableDateRequest, AvailableDateResponse> {
@@ -53,5 +56,9 @@ public class AvailableDateService implements GenericCRUD<AvailableDate, Availabl
         AvailableDate availableDateToBeDeleted = getById(id);
 
         availableDateRepository.delete(availableDateToBeDeleted);
+    }
+
+    public Optional<AvailableDate> getByDoctorIdAndAvailableDate(Long doctorId, LocalDate availableDate) {
+        return availableDateRepository.findByDoctorIdAndAvailableDate(doctorId, availableDate);
     }
 }
