@@ -12,4 +12,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleException(EntityNotFoundException e) {
         return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(VaccineInEffectException.class)
+    public ResponseEntity<?> handleException(VaccineInEffectException e) {
+        return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+    }
 }
