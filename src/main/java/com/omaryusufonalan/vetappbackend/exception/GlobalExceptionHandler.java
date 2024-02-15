@@ -17,4 +17,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleException(VaccineInEffectException e) {
         return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
     }
+
+    @ExceptionHandler(DoctorNotAvailableException.class)
+    public ResponseEntity<?> handleException(DoctorNotAvailableException e) {
+        return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+    }
 }
