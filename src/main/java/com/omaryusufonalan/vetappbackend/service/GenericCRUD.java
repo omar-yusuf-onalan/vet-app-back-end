@@ -1,9 +1,14 @@
 package com.omaryusufonalan.vetappbackend.service;
 
+import com.omaryusufonalan.vetappbackend.dto.page.PageRequest;
+import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
+
 public interface GenericCRUD<Entity, EntityRequest, EntityResponse> {
     Entity getById(Long id);
 
     EntityResponse getResponseById(Long id);
+
+    PageResponse<EntityResponse> getPage(PageRequest pageRequest);
 
     EntityResponse create(EntityRequest entityRequest);
 
