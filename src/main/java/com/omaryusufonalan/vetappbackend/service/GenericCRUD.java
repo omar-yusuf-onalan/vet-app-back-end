@@ -8,7 +8,7 @@ public interface GenericCRUD<Entity, EntityRequest, EntityResponse> {
 
     EntityResponse getResponseById(Long id);
 
-    PageResponse<EntityResponse> getPage(PageRequest pageRequest);
+    PageResponse<EntityResponse> getPage(int page, int pageSize);
 
     EntityResponse create(EntityRequest entityRequest);
 
