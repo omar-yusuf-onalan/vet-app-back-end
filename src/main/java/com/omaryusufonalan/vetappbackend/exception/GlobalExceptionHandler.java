@@ -22,4 +22,9 @@ public class GlobalExceptionHandler {
     public ResponseEntity<?> handleException(DoctorNotAvailableException e) {
         return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
     }
+
+    @ExceptionHandler(AppointmentHourConflictException.class)
+    public ResponseEntity<?> handleException(AppointmentHourConflictException e) {
+        return new ResponseEntity<>(new ExceptionContainer(e.getMessage()), HttpStatus.NOT_ACCEPTABLE);
+    }
 }
