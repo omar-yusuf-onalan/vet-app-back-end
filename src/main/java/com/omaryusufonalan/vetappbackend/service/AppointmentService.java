@@ -2,11 +2,9 @@ package com.omaryusufonalan.vetappbackend.service;
 
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentRequest;
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
-import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Appointment;
 import com.omaryusufonalan.vetappbackend.entity.AvailableDate;
-import com.omaryusufonalan.vetappbackend.entity.Appointment;
 import com.omaryusufonalan.vetappbackend.exception.AppointmentHourConflictException;
 import com.omaryusufonalan.vetappbackend.exception.DoctorNotAvailableException;
 import com.omaryusufonalan.vetappbackend.mapper.AppointmentMapper;

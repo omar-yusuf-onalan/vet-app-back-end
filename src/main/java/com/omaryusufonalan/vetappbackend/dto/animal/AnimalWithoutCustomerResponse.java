@@ -1,9 +1,7 @@
 package com.omaryusufonalan.vetappbackend.dto.animal;
 
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentWithoutAnythingResponse;
-import com.omaryusufonalan.vetappbackend.dto.customer.CustomerWithoutAnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnimalResponse;
-import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import lombok.*;
 
 import java.time.LocalDate;

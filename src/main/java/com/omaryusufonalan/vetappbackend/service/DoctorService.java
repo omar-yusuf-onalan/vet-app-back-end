@@ -1,10 +1,8 @@
 package com.omaryusufonalan.vetappbackend.service;
 
-import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorResponse;
 import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorRequest;
 import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
-import com.omaryusufonalan.vetappbackend.entity.Doctor;
 import com.omaryusufonalan.vetappbackend.entity.Doctor;
 import com.omaryusufonalan.vetappbackend.mapper.DoctorMapper;
 import com.omaryusufonalan.vetappbackend.repository.DoctorRepository;

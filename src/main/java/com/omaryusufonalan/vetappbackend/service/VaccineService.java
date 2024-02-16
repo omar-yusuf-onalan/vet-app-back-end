@@ -1,10 +1,8 @@
 package com.omaryusufonalan.vetappbackend.service;
 
-import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineRequest;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineResponse;
-import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.exception.VaccineInEffectException;
 import com.omaryusufonalan.vetappbackend.mapper.VaccineMapper;

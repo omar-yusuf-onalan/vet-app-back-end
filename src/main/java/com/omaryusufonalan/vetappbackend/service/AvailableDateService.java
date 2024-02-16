@@ -2,9 +2,7 @@ package com.omaryusufonalan.vetappbackend.service;
 
 import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateRequest;
 import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateResponse;
-import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
-import com.omaryusufonalan.vetappbackend.entity.AvailableDate;
 import com.omaryusufonalan.vetappbackend.entity.AvailableDate;
 import com.omaryusufonalan.vetappbackend.mapper.AvailableDateMapper;
 import com.omaryusufonalan.vetappbackend.repository.AvailableDateRepository;
