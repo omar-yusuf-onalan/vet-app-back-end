@@ -1,13 +1,19 @@
 package com.omaryusufonalan.vetappbackend.service;
 
+import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineResponse;
+import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineRequest;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineResponse;
+import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.exception.VaccineInEffectException;
 import com.omaryusufonalan.vetappbackend.mapper.VaccineMapper;
 import com.omaryusufonalan.vetappbackend.repository.VaccineRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -17,6 +23,7 @@ import java.util.Optional;
 public class VaccineService implements GenericCRUD<Vaccine, VaccineRequest, VaccineResponse> {
     private final VaccineRepository vaccineRepository;
     private final VaccineMapper vaccineMapper;
+    private final PageService<VaccineResponse> pageService;
 
     @Override
     public Vaccine getById(Long id) {
@@ -29,6 +36,18 @@ public class VaccineService implements GenericCRUD<Vaccine, VaccineRequest, Vacc
         Vaccine vaccineRetrievedFromDatabase = getById(id);
 
         return vaccineMapper.asVaccineResponse(vaccineRetrievedFromDatabase);
+    }
+
+    @Override
+    public PageResponse<VaccineResponse> getPageResponse(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Vaccine> pageOfVaccines = vaccineRepository.findAll(pageable);
+
+        Page<VaccineResponse> pageOfVaccineResponses = pageOfVaccines
+                .map(vaccine -> vaccineMapper.asVaccineResponse(vaccine));
+
+        return pageService.createPageResponse(page, pageSize, pageOfVaccineResponses);
     }
 
     @Override
