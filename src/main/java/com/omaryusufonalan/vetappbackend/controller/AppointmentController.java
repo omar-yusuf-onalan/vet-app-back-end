@@ -18,6 +18,14 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.getResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getPageResponse(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize)
+    {
+        return new ResponseEntity<>(appointmentService.getPageResponse(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody AppointmentRequest appointmentRequest) {
         return new ResponseEntity<>(appointmentService.create(appointmentRequest), HttpStatus.CREATED);
