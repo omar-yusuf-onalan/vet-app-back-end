@@ -4,7 +4,6 @@ import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
-import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.mapper.AnimalMapper;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
