@@ -2,11 +2,17 @@ package com.omaryusufonalan.vetappbackend.service;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.mapper.AnimalMapper;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +20,7 @@ import org.springframework.stereotype.Service;
 public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalResponse> {
     private final AnimalRepository animalRepository;
     private final AnimalMapper animalMapper;
+    private final PageService<AnimalResponse> pageService;
 
     @Override
     public Animal getById(Long id) {
@@ -26,6 +33,18 @@ public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalR
         Animal animalRetrievedFromDatabase = getById(id);
 
         return animalMapper.asAnimalResponse(animalRetrievedFromDatabase);
+    }
+
+    @Override
+    public PageResponse<AnimalResponse> getPageResponse(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Animal> pageOfAnimals = animalRepository.findAll(pageable);
+
+        Page<AnimalResponse> pageOfAnimalResponses = pageOfAnimals
+                .map(animal -> animalMapper.asAnimalResponse(animal));
+
+        return pageService.createPageResponse(page, pageSize, pageOfAnimalResponses);
     }
 
     @Override
