@@ -19,6 +19,14 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getPageResponse(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize)
+    {
+        return new ResponseEntity<>(animalService.getPageResponse(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody AnimalRequest animalRequest) {
         return new ResponseEntity<>(animalService.create(animalRequest), HttpStatus.CREATED);
