@@ -4,6 +4,7 @@ import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.mapper.AnimalMapper;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalResponse> {
+public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalResponse>, FilterOperation<Animal, AnimalResponse> {
     private final AnimalRepository animalRepository;
     private final AnimalMapper animalMapper;
     private final PageService<AnimalResponse> pageService;
@@ -70,5 +71,17 @@ public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalR
         Animal animalToBeDeleted = getById(id);
 
         animalRepository.delete(animalToBeDeleted);
+    }
+
+    @Override
+    public Animal filterByName(String name) {
+        return animalRepository.findByNameIgnoreCaseContaining(name);
+    }
+
+    @Override
+    public AnimalResponse filterResponseByName(String name) {
+        Animal animalRetrievedFromDatabase = animalRepository.findByNameIgnoreCaseContaining(name);
+
+        return animalMapper.asAnimalResponse(animalRetrievedFromDatabase);
     }
 }

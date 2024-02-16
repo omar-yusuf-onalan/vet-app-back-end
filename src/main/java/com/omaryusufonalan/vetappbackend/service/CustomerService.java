@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService implements GenericCRUD<Customer, CustomerRequest, CustomerResponse> {
+public class CustomerService implements GenericCRUD<Customer, CustomerRequest, CustomerResponse>, FilterOperation<Customer, CustomerResponse> {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
     private final PageService<CustomerResponse> pageService;
@@ -70,5 +70,17 @@ public class CustomerService implements GenericCRUD<Customer, CustomerRequest, C
         Customer customerToBeDeleted = getById(id);
 
         customerRepository.delete(customerToBeDeleted);
+    }
+
+    @Override
+    public Customer filterByName(String name) {
+        return customerRepository.findByNameIgnoreCaseContaining(name);
+    }
+
+    @Override
+    public CustomerResponse filterResponseByName(String name) {
+        Customer customerRetrievedFromDatabase = customerRepository.findByNameIgnoreCaseContaining(name);
+
+        return customerMapper.asCustomerResponse(customerRetrievedFromDatabase);
     }
 }
