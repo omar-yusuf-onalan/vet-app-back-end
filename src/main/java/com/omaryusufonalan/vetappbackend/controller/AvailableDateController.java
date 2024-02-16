@@ -18,6 +18,14 @@ public class AvailableDateController {
         return new ResponseEntity<>(availableDateService.getResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getPageResponse(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize)
+    {
+        return new ResponseEntity<>(availableDateService.getPageResponse(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody AvailableDateRequest availableDateRequest) {
         return new ResponseEntity<>(availableDateService.create(availableDateRequest), HttpStatus.CREATED);
