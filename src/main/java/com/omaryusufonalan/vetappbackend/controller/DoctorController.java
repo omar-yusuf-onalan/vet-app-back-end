@@ -18,6 +18,14 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.getResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> getPageResponse(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize)
+    {
+        return new ResponseEntity<>(doctorService.getPageResponse(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody DoctorRequest doctorRequest) {
         return new ResponseEntity<>(doctorService.create(doctorRequest), HttpStatus.CREATED);
