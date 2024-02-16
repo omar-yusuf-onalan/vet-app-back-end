@@ -2,14 +2,20 @@ package com.omaryusufonalan.vetappbackend.service;
 
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentRequest;
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
+import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
+import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Appointment;
 import com.omaryusufonalan.vetappbackend.entity.AvailableDate;
+import com.omaryusufonalan.vetappbackend.entity.Appointment;
 import com.omaryusufonalan.vetappbackend.exception.AppointmentHourConflictException;
 import com.omaryusufonalan.vetappbackend.exception.DoctorNotAvailableException;
 import com.omaryusufonalan.vetappbackend.mapper.AppointmentMapper;
 import com.omaryusufonalan.vetappbackend.repository.AppointmentRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,6 +28,7 @@ public class AppointmentService implements GenericCRUD<Appointment, AppointmentR
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
     private final AvailableDateService availableDateService;
+    private final PageService<AppointmentResponse> pageService;
 
     @Override
     public Appointment getById(Long id) {
@@ -34,6 +41,18 @@ public class AppointmentService implements GenericCRUD<Appointment, AppointmentR
         Appointment appointmentRetrievedFromDatabase = getById(id);
 
         return appointmentMapper.asAppointmentResponse(appointmentRetrievedFromDatabase);
+    }
+
+    @Override
+    public PageResponse<AppointmentResponse> getPageResponse(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Appointment> pageOfAppointments = appointmentRepository.findAll(pageable);
+
+        Page<AppointmentResponse> pageOfAppointmentResponses = pageOfAppointments
+                .map(appointment -> appointmentMapper.asAppointmentResponse(appointment));
+
+        return pageService.createPageResponse(page, pageSize, pageOfAppointmentResponses);
     }
 
     @Override
