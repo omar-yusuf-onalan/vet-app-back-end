@@ -2,11 +2,15 @@ package com.omaryusufonalan.vetappbackend.service;
 
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerRequest;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerResponse;
+import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Customer;
 import com.omaryusufonalan.vetappbackend.mapper.CustomerMapper;
 import com.omaryusufonalan.vetappbackend.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService implements GenericCRUD<Customer, CustomerRequest, CustomerResponse> {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final PageService<CustomerResponse> pageService;
 
     @Override
     public Customer getById(Long id) {
@@ -26,6 +31,18 @@ public class CustomerService implements GenericCRUD<Customer, CustomerRequest, C
         Customer customerRetrievedFromDatabase = getById(id);
 
         return customerMapper.asCustomerResponse(customerRetrievedFromDatabase);
+    }
+
+    @Override
+    public PageResponse<CustomerResponse> getPageResponse(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Customer> pageOfCustomers = customerRepository.findAll(pageable);
+
+        Page<CustomerResponse> pageOfCustomerResponses = pageOfCustomers
+                .map(customer -> customerMapper.asCustomerResponse(customer));
+
+        return pageService.createPageResponse(page, pageSize, pageOfCustomerResponses);
     }
 
     @Override
