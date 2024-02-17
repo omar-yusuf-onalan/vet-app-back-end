@@ -1,8 +1,11 @@
 package com.omaryusufonalan.vetappbackend.service;
 
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalWithoutCustomerResponse;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerRequest;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Customer;
 import com.omaryusufonalan.vetappbackend.mapper.CustomerMapper;
 import com.omaryusufonalan.vetappbackend.repository.CustomerRepository;
@@ -13,9 +16,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
-public class CustomerService implements GenericCRUD<Customer, CustomerRequest, CustomerResponse>, FilterOperation<Customer, CustomerResponse> {
+public class CustomerService implements
+        GenericCRUD<Customer, CustomerRequest, CustomerResponse>,
+        FilterOperation<Customer, CustomerResponse>,
+        GetOwnedAnimals {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
     private final PageService<CustomerResponse> pageService;
@@ -82,5 +90,15 @@ public class CustomerService implements GenericCRUD<Customer, CustomerRequest, C
         Customer customerRetrievedFromDatabase = customerRepository.findByNameIgnoreCaseContaining(name);
 
         return customerMapper.asCustomerResponse(customerRetrievedFromDatabase);
+    }
+
+    @Override
+    public Set<Animal> getAllOwnedAnimals(Long id) {
+        return getById(id).getAnimals();
+    }
+
+    @Override
+    public Set<AnimalWithoutCustomerResponse> getAllOwnedAnimalWithoutCustomerResponses(Long id) {
+        return customerMapper.asCustomerResponse(getById(id)).getAnimals();
     }
 }
