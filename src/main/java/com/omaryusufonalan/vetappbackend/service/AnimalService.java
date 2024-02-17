@@ -3,7 +3,9 @@ package com.omaryusufonalan.vetappbackend.service;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
+import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnimalResponse;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
+import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.mapper.AnimalMapper;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -13,9 +15,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
-public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalResponse>, FilterOperation<Animal, AnimalResponse> {
+public class AnimalService implements
+        GenericCRUD<Animal, AnimalRequest, AnimalResponse>,
+        FilterOperation<Animal, AnimalResponse>,
+        GetAdministeredVaccines {
     private final AnimalRepository animalRepository;
     private final AnimalMapper animalMapper;
     private final PageService<AnimalResponse> pageService;
@@ -82,5 +89,15 @@ public class AnimalService implements GenericCRUD<Animal, AnimalRequest, AnimalR
         Animal animalRetrievedFromDatabase = animalRepository.findByNameIgnoreCaseContaining(name);
 
         return animalMapper.asAnimalResponse(animalRetrievedFromDatabase);
+    }
+
+    @Override
+    public Set<Vaccine> getAllAdministeredVaccines(Long id) {
+        return getById(id).getVaccines();
+    }
+
+    @Override
+    public Set<VaccineWithoutAnimalResponse> getAllAdministeredVaccineWithoutAnimalResponses(Long id) {
+        return animalMapper.asAnimalResponse(getById(id)).getVaccines();
     }
 }
