@@ -26,6 +26,11 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getPageResponse(page, pageSize), HttpStatus.OK);
     }
 
+    @GetMapping("/owned-animals/{id}")
+    public ResponseEntity<?> getAllOwnedAnimalWithoutCustomerResponses(@PathVariable Long id) {
+        return new ResponseEntity<>(customerService.getAllOwnedAnimalWithoutCustomerResponses(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody CustomerRequest customerRequest) {
         return new ResponseEntity<>(customerService.create(customerRequest), HttpStatus.CREATED);
