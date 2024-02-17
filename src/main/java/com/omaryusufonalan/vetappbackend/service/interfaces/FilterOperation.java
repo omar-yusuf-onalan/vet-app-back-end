@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.service;
+package com.omaryusufonalan.vetappbackend.service.interfaces;
 
 public interface FilterOperation<Entity, EntityResponse> {
     Entity filterByName(String name);

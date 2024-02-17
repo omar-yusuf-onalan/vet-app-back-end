@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.service;
+package com.omaryusufonalan.vetappbackend.service.interfaces;
 
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnimalResponse;
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;

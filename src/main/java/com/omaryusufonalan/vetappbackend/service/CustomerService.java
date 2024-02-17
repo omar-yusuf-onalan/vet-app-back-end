@@ -1,6 +1,5 @@
 package com.omaryusufonalan.vetappbackend.service;
 
-import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalWithoutCustomerResponse;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerRequest;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerResponse;
@@ -9,6 +8,9 @@ import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Customer;
 import com.omaryusufonalan.vetappbackend.mapper.CustomerMapper;
 import com.omaryusufonalan.vetappbackend.repository.CustomerRepository;
+import com.omaryusufonalan.vetappbackend.service.interfaces.FilterOperation;
+import com.omaryusufonalan.vetappbackend.service.interfaces.GenericCRUD;
+import com.omaryusufonalan.vetappbackend.service.interfaces.GetOwnedAnimals;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

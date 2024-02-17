@@ -9,6 +9,7 @@ import com.omaryusufonalan.vetappbackend.exception.AppointmentHourConflictExcept
 import com.omaryusufonalan.vetappbackend.exception.DoctorNotAvailableException;
 import com.omaryusufonalan.vetappbackend.mapper.AppointmentMapper;
 import com.omaryusufonalan.vetappbackend.repository.AppointmentRepository;
+import com.omaryusufonalan.vetappbackend.service.interfaces.GenericCRUD;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

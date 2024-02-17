@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.service;
+package com.omaryusufonalan.vetappbackend.service.interfaces;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalWithoutCustomerResponse;
 import com.omaryusufonalan.vetappbackend.entity.Animal;

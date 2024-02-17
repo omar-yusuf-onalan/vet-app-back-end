@@ -6,6 +6,7 @@ import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
 import com.omaryusufonalan.vetappbackend.entity.Doctor;
 import com.omaryusufonalan.vetappbackend.mapper.DoctorMapper;
 import com.omaryusufonalan.vetappbackend.repository.DoctorRepository;
+import com.omaryusufonalan.vetappbackend.service.interfaces.GenericCRUD;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

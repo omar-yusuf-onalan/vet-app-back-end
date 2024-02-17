@@ -7,6 +7,7 @@ import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.exception.VaccineInEffectException;
 import com.omaryusufonalan.vetappbackend.mapper.VaccineMapper;
 import com.omaryusufonalan.vetappbackend.repository.VaccineRepository;
+import com.omaryusufonalan.vetappbackend.service.interfaces.GenericCRUD;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
