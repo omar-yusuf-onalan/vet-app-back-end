@@ -27,6 +27,11 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getPageResponse(page, pageSize), HttpStatus.OK);
     }
 
+    @GetMapping("/administered-vaccines/{id}")
+    public ResponseEntity<?> getAllAdministeredVaccineWithoutAnimalResponses(@PathVariable Long id) {
+        return new ResponseEntity<>(animalService.getAllAdministeredVaccineWithoutAnimalResponses(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody AnimalRequest animalRequest) {
         return new ResponseEntity<>(animalService.create(animalRequest), HttpStatus.CREATED);
