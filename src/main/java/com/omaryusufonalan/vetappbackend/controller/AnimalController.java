@@ -31,7 +31,7 @@ public class AnimalController {
 
     @GetMapping("/administered-vaccines/{id}")
     public ResponseEntity<?> getAllAdministeredVaccineWithoutAnimalResponses(@PathVariable Long id) {
-        return new ResponseEntity<>(animalService.getAllAdministeredVaccineWithoutAnimalResponses(id), HttpStatus.OK);
+        return new ResponseEntity<>(animalService.getAllAdministeredVaccineWithoutAnythingResponses(id), HttpStatus.OK);
     }
 
     @PostMapping

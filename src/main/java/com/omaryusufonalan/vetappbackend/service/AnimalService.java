@@ -3,7 +3,7 @@ package com.omaryusufonalan.vetappbackend.service;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.page.PageResponse;
-import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnythingResponse;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import com.omaryusufonalan.vetappbackend.mapper.AnimalMapper;
@@ -100,7 +100,7 @@ public class AnimalService implements
     }
 
     @Override
-    public Set<VaccineWithoutAnimalResponse> getAllAdministeredVaccineWithoutAnimalResponses(Long id) {
+    public Set<VaccineWithoutAnythingResponse> getAllAdministeredVaccineWithoutAnythingResponses(Long id) {
         return animalMapper.asAnimalResponse(getById(id)).getVaccines();
     }
 }
