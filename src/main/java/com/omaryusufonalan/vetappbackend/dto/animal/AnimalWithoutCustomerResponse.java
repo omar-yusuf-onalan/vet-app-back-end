@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.dto.animal;
 
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentWithoutAnythingResponse;
-import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineWithoutAnythingResponse;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -27,7 +27,7 @@ public class AnimalWithoutCustomerResponse {
 
     private LocalDate dateOfBirth;
 
-    private Set<VaccineWithoutAnimalResponse> vaccines;
+    private Set<VaccineWithoutAnythingResponse> vaccines;
 
     private Set<AppointmentWithoutAnythingResponse> appointments;
 }
