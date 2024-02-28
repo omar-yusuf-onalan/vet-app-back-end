@@ -1,6 +1,7 @@
 package com.omaryusufonalan.vetappbackend.dto.vaccine;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.report.ReportWithoutAnythingResponse;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -22,4 +23,6 @@ public class VaccineResponse {
     private LocalDate protectionFinishDate;
 
     private AnimalResponse animal;
+
+    private ReportWithoutAnythingResponse report;
 }
