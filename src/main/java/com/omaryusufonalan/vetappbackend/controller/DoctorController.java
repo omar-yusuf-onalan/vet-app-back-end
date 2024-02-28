@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
+
 @RestController
-@RequestMapping("vet-app/api/v1/doctor")
+@RequestMapping(BASE_URL + "/doctors")
 @RequiredArgsConstructor
 public class DoctorController {
     private final DoctorService doctorService;
