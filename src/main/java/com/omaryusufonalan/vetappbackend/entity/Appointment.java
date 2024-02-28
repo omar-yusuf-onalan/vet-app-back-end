@@ -1,9 +1,6 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,4 +25,7 @@ public class Appointment {
 
     @ManyToOne
     private Doctor doctor;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "appointment", cascade = CascadeType.REMOVE)
+    private Report report;
 }
