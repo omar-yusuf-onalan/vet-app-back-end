@@ -2,6 +2,7 @@ package com.omaryusufonalan.vetappbackend.dto.appointment;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalWithoutAppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorWithoutAppointmentResponse;
+import com.omaryusufonalan.vetappbackend.dto.report.ReportWithoutAnythingResponse;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -19,4 +20,6 @@ public class AppointmentResponse {
     private AnimalWithoutAppointmentResponse animal;
 
     private DoctorWithoutAppointmentResponse doctor;
+
+    private ReportWithoutAnythingResponse report;
 }
