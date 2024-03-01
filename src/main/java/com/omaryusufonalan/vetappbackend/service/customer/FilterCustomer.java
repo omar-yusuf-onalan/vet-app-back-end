@@ -2,7 +2,9 @@ package com.omaryusufonalan.vetappbackend.service.customer;
 
 import com.omaryusufonalan.vetappbackend.entity.Customer;
 
+import java.util.List;
+
 public interface FilterCustomer {
-    Customer filterCustomerByName(String customerName);
-    Customer filterCustomerResponseByName(String customerName);
+    List<Customer> filterCustomerByName(String customerName);
+    List<Customer> filterCustomerResponseByName(String customerName);
 }
