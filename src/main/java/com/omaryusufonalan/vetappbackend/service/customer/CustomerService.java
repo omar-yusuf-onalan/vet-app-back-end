@@ -10,9 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class CustomerService implements CustomerCRUD {
+public class CustomerService implements CustomerCRUD, FilterCustomer {
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
@@ -46,5 +48,17 @@ public class CustomerService implements CustomerCRUD {
     @Override
     public void deleteCustomerById(Long id) {
         customerRepository.delete(getCustomerById(id));
+    }
+    
+    @Override
+    public List<Customer> filterCustomersByName(String customerName) {
+        return customerRepository.findByNameIgnoringCaseContaining(customerName);
+    }
+
+    @Override
+    public List<CustomerResponse> filterCustomerResponsesByName(String customerName) {
+        return customerRepository.findByNameIgnoringCaseContaining(customerName)
+                .stream().map(customer -> modelMapper.map(customer, CustomerResponse.class))
+                .toList();
     }
 }
