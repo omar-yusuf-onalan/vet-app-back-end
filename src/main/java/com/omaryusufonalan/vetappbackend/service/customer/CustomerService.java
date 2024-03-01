@@ -49,7 +49,7 @@ public class CustomerService implements CustomerCRUD, FilterCustomer {
     public void deleteCustomerById(Long id) {
         customerRepository.delete(getCustomerById(id));
     }
-    
+
     @Override
     public List<Customer> filterCustomersByName(String customerName) {
         return customerRepository.findByNameIgnoringCaseContaining(customerName);
