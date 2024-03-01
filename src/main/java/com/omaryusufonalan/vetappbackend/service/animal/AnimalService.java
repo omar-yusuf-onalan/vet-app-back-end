@@ -3,6 +3,8 @@ package com.omaryusufonalan.vetappbackend.service.animal;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -10,9 +12,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class AnimalService implements AnimalCRUD {
+public class AnimalService implements AnimalCRUD, FilterAnimal {
     private final AnimalRepository animalRepository;
     private final ModelMapper modelMapper;
 
@@ -46,5 +50,17 @@ public class AnimalService implements AnimalCRUD {
     @Override
     public void deleteAnimalById(Long id) {
         animalRepository.delete(getAnimalById(id));
+    }
+
+    @Override
+    public List<Animal> filterAnimalsByName(String animalName) {
+        return animalRepository.findByNameIgnoringCaseContaining(animalName);
+    }
+
+    @Override
+    public List<AnimalResponse> filterAnimalResponsesByName(String animalName) {
+        return animalRepository.findByNameIgnoringCaseContaining(animalName)
+                .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class))
+                .toList();
     }
 }
