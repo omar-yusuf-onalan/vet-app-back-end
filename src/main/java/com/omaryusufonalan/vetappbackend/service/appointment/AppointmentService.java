@@ -14,10 +14,11 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentService implements AppointmentCRUD, ValidateAppointment {
+public class AppointmentService implements AppointmentCRUD, ValidateAppointment, FilterAppointment {
     private final AppointmentRepository appointmentRepository;
     private final ModelMapper modelMapper;
     private final AvailableDateService availableDateService;
@@ -91,5 +92,29 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment 
 
         if (hourConflictIsPresent)
             throw new AppointmentHourConflictException("Hour conflict is present at this hour: " + appointmentDate);
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsByDoctorIdAndTwoDates(Long doctorId, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByDoctorIdAndTwoDates(doctorId, startDate, finishDate);
+    }
+
+    @Override
+    public List<AppointmentResponse> getAppointmentResponsesByDoctorIdAndTwoDates(Long doctorId, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByDoctorIdAndTwoDates(doctorId, startDate, finishDate)
+                .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
+                .toList();
+    }
+
+    @Override
+    public List<Appointment> getAppointmentsByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByAnimalIdAndTwoDates(animalId, startDate, finishDate);
+    }
+
+    @Override
+    public List<AppointmentResponse> getAppointmentResponsesByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByAnimalIdAndTwoDates(animalId, startDate, finishDate)
+                .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
+                .toList();
     }
 }
