@@ -7,22 +7,22 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface FilterAppointment {
-    List<Appointment> getAppointmentsByDoctorIdAndTwoDates(
+    List<Appointment> filterAppointmentsByDoctorIdAndTwoDates(
             Long doctorId,
             LocalDate startDate,
             LocalDate finishDate
     );
-    List<AppointmentResponse> getAppointmentResponsesByDoctorIdAndTwoDates(
+    List<AppointmentResponse> filterAppointmentResponsesByDoctorIdAndTwoDates(
             Long doctorId,
             LocalDate startDate,
             LocalDate finishDate
     );
-    List<Appointment> getAppointmentsByAnimalIdAndTwoDates(
+    List<Appointment> filterAppointmentsByAnimalIdAndTwoDates(
             Long animalId,
             LocalDate startDate,
             LocalDate finishDate
     );
-    List<AppointmentResponse> getAppointmentResponsesByAnimalIdAndTwoDates(
+    List<AppointmentResponse> filterAppointmentResponsesByAnimalIdAndTwoDates(
             Long animalId,
             LocalDate startDate,
             LocalDate finishDate
