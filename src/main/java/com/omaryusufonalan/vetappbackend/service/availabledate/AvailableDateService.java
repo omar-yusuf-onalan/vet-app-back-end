@@ -10,9 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
-public class AvailableDateService implements AvailableDateCRUD {
+public class AvailableDateService implements AvailableDateCRUD, FilterAvailableDate {
     private final AvailableDateRepository availableDateRepository;
     private final ModelMapper modelMapper;
 
@@ -46,5 +49,20 @@ public class AvailableDateService implements AvailableDateCRUD {
     @Override
     public void deleteAvailableDateById(Long id) {
         availableDateRepository.delete(getAvailableDateById(id));
+    }
+
+    @Override
+    public List<AvailableDate> filterAvailableDatesByDoctorIdAndAvailableDate(Long doctorId, LocalDate availableDate) {
+        return availableDateRepository.findByDoctorIdAndAvailableDate(doctorId, availableDate);
+    }
+
+    @Override
+    public List<AvailableDateResponse> filterAvailableDateResponsesByDoctorIdAndAvailableDate(
+            Long doctorId,
+            LocalDate availableDate
+    ) {
+        return availableDateRepository.findByDoctorIdAndAvailableDate(doctorId, availableDate)
+                .stream().map(object -> modelMapper.map(object, AvailableDateResponse.class))
+                .toList();
     }
 }
