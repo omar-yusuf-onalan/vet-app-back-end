@@ -1,8 +1,10 @@
 package com.omaryusufonalan.vetappbackend.service.customer;
 
+import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerResponse;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerUpdateRequest;
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Customer;
 import com.omaryusufonalan.vetappbackend.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService implements CustomerCRUD, FilterCustomer {
+public class CustomerService implements CustomerCRUD, FilterCustomer, GetAnimal {
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
@@ -60,5 +62,16 @@ public class CustomerService implements CustomerCRUD, FilterCustomer {
         return customerRepository.findByNameIgnoringCaseContaining(customerName)
                 .stream().map(customer -> modelMapper.map(customer, CustomerResponse.class))
                 .toList();
+    }
+
+    @Override
+    public List<Animal> getCustomerAnimals(Long id) {
+        return getCustomerById(id).getAnimals();
+    }
+
+    @Override
+    public List<AnimalResponse> getCustomerAnimalResponses(Long id) {
+        return getCustomerById(id).getAnimals()
+                .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class)).toList();
     }
 }
