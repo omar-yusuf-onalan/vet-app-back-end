@@ -23,6 +23,16 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> filterByName(@RequestParam("name") String name){
+        return new ResponseEntity<>(customerService.filterCustomerResponsesByName(name), HttpStatus.OK);
+    }
+
+    @GetMapping("animals/{id}")
+    public ResponseEntity<?> getAnimals(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(customerService.getCustomerAnimalResponses(id), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CustomerCreateRequest customerSaveRequest) {
         return new ResponseEntity<>(customerService.createCustomer(customerSaveRequest), HttpStatus.CREATED);
