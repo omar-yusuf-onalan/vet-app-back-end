@@ -22,6 +22,11 @@ public class VaccineController {
         return new ResponseEntity<>(vaccineService.getVaccineResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> filterByAnimalId(@RequestParam("animal-id") Long animalId){
+        return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody VaccineCreateRequest vaccineSaveRequest) {
         return new ResponseEntity<>(vaccineService.createVaccine(vaccineSaveRequest), HttpStatus.CREATED);
