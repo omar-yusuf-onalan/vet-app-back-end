@@ -29,7 +29,7 @@ public class VaccineController {
         return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/dates")
     public ResponseEntity<?> filterByTwoDates(
             @RequestParam("start-date") LocalDate startDate,
             @RequestParam("finish-date")LocalDate finishDate
