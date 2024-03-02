@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentService implements AppointmentCRUD {
+public class AppointmentService implements AppointmentCRUD, ValidateAppointment {
     private final AppointmentRepository appointmentRepository;
     private final ModelMapper modelMapper;
 
@@ -46,5 +46,10 @@ public class AppointmentService implements AppointmentCRUD {
     @Override
     public void deleteAppointmentById(Long id) {
         appointmentRepository.delete(getAppointmentById(id));
+    }
+
+    @Override
+    public void validateAppointment(Appointment appointment) {
+
     }
 }
