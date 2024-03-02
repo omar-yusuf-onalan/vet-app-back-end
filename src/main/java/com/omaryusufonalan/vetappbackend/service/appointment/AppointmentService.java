@@ -4,12 +4,16 @@ import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentCreateReques
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentUpdateRequest;
 import com.omaryusufonalan.vetappbackend.entity.Appointment;
+import com.omaryusufonalan.vetappbackend.exception.AppointmentHourConflictException;
 import com.omaryusufonalan.vetappbackend.repository.AppointmentRepository;
 import com.omaryusufonalan.vetappbackend.service.availabledate.AvailableDateService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +37,8 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment 
     public AppointmentResponse createAppointment(AppointmentCreateRequest appointmentCreateRequest) {
         Appointment appointmentToBeCreated = modelMapper.map(appointmentCreateRequest, Appointment.class);
 
+        validateAppointment(appointmentToBeCreated);
+
         return modelMapper.map(appointmentRepository.save(appointmentToBeCreated), AppointmentResponse.class);
     }
 
@@ -41,6 +47,8 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment 
         Appointment doesAppointmentExist = getAppointmentById(appointmentUpdateRequest.getId());
 
         modelMapper.map(appointmentUpdateRequest, doesAppointmentExist);
+
+        validateAppointment(doesAppointmentExist);
 
         return modelMapper.map(appointmentRepository.save(doesAppointmentExist), AppointmentResponse.class);
     }
@@ -52,6 +60,36 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment 
 
     @Override
     public void validateAppointment(Appointment appointment) {
+        // check #1 Is doctor available on the requested date?
+        checkIfDoctorIsNotAvailable(appointment);
 
+        // check #2 Is there an hour conflict present?
+        checkIfThereIsAnHourConflict(appointment);
+    }
+
+    private void checkIfDoctorIsNotAvailable(Appointment appointment) {
+        Long doctorId = appointment.getDoctor().getId();
+        LocalDate appointmentDate = appointment.getAppointmentDate().toLocalDate();
+
+        boolean doctorIsNotAvailable = availableDateService.filterAvailableDatesByDoctorIdAndAvailableDate(
+                doctorId,
+                appointmentDate
+                ).isEmpty();
+
+        if (doctorIsNotAvailable)
+            throw new RuntimeException("Doctor is not available at this date: " + appointmentDate);
+    }
+
+    private void checkIfThereIsAnHourConflict(Appointment appointment) {
+        Long doctorId = appointment.getDoctor().getId();
+        LocalDateTime appointmentDate = appointment.getAppointmentDate();
+
+        boolean hourConflictIsPresent = appointmentRepository.findByDoctorIdAndAppointmentDate(
+                doctorId,
+                appointmentDate
+                ).isPresent();
+
+        if (hourConflictIsPresent)
+            throw new AppointmentHourConflictException("Hour conflict is present at this hour: " + appointmentDate);
     }
 }
