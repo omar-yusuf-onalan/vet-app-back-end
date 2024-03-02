@@ -20,7 +20,7 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.getCustomerResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping

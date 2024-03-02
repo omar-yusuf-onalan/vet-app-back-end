@@ -19,7 +19,7 @@ public class AnimalController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(animalService.getAnimalById(id), HttpStatus.OK);
+        return new ResponseEntity<>(animalService.getAnimalResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping
