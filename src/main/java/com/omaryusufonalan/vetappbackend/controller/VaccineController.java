@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
@@ -25,6 +27,17 @@ public class VaccineController {
     @GetMapping
     public ResponseEntity<?> filterByAnimalId(@RequestParam("animal-id") Long animalId){
         return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> filterByTwoDates(
+            @RequestParam("start-date") LocalDate startDate,
+            @RequestParam("finish-date")LocalDate finishDate
+    ){
+        return new ResponseEntity<>(
+                vaccineService.findAllVaccineResponsesBetweenTwoDates(startDate, finishDate),
+                HttpStatus.OK
+        );
     }
 
     @PostMapping
