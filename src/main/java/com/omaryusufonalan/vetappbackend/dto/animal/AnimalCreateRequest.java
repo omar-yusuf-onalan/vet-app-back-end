@@ -2,6 +2,7 @@ package com.omaryusufonalan.vetappbackend.dto.animal;
 
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerUpdateRequest;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,7 +30,7 @@ public class AnimalCreateRequest {
     @NotBlank
     private String color;
 
-    @NotBlank
+    @NotNull
     private LocalDate dateOfBirth;
 
     private CustomerUpdateRequest customer;
