@@ -5,6 +5,7 @@ import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentUpdateRequest;
 import com.omaryusufonalan.vetappbackend.entity.Appointment;
 import com.omaryusufonalan.vetappbackend.repository.AppointmentRepository;
+import com.omaryusufonalan.vetappbackend.service.availabledate.AvailableDateService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class AppointmentService implements AppointmentCRUD, ValidateAppointment {
     private final AppointmentRepository appointmentRepository;
     private final ModelMapper modelMapper;
+    private final AvailableDateService availableDateService;
 
     @Override
     public Appointment getAppointmentById(Long id) {
