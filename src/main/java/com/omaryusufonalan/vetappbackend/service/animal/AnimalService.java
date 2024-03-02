@@ -3,8 +3,6 @@ package com.omaryusufonalan.vetappbackend.service.animal;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalUpdateRequest;
-import com.omaryusufonalan.vetappbackend.dto.animal.AnimalResponse;
-import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.repository.AnimalRepository;
 import jakarta.persistence.EntityNotFoundException;
