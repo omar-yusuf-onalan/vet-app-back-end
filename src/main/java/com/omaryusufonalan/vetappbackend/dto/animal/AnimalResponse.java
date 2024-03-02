@@ -1,12 +1,14 @@
 package com.omaryusufonalan.vetappbackend.dto.animal;
 
 import com.omaryusufonalan.vetappbackend.dto.customer.OnlyCustomerResponse;
+import com.omaryusufonalan.vetappbackend.dto.vaccine.OnlyVaccineResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +30,6 @@ public class AnimalResponse {
     private LocalDate dateOfBirth;
 
     private OnlyCustomerResponse customer;
+
+    private List<OnlyVaccineResponse> vaccines;
 }
