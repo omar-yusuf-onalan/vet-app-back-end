@@ -22,6 +22,11 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getAnimalById(id), HttpStatus.OK);
     }
 
+    @GetMapping
+    public ResponseEntity<?> filterByName(@RequestParam("name") String name){
+        return new ResponseEntity<>(animalService.filterAnimalResponsesByName(name), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AnimalCreateRequest animalSaveRequest) {
         return new ResponseEntity<>(animalService.createAnimal(animalSaveRequest), HttpStatus.CREATED);
