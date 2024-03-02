@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,6 +74,18 @@ public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVacci
     @Override
     public List<VaccineResponse> filterVaccineResponsesByAnimalId(Long animalId) {
         return vaccineRepository.findByAnimalId(animalId)
+                .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
+                .toList();
+    }
+
+    @Override
+    public List<Vaccine> findAllVaccinesBetweenTwoDates(LocalDate startDate, LocalDate finishDate) {
+        return vaccineRepository.findAllVaccinesBetweenTwoDates(startDate, finishDate);
+    }
+
+    @Override
+    public List<VaccineResponse> findAllVaccineResponsesBetweenTwoDates(LocalDate startDate, LocalDate finishDate) {
+        return vaccineRepository.findAllVaccinesBetweenTwoDates(startDate, finishDate)
                 .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
                 .toList();
     }
