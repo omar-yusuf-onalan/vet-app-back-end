@@ -11,11 +11,12 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class VaccineService implements VaccineCRUD, ValidateVaccine {
+public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVaccine {
     private final VaccineRepository vaccineRepository;
     private final ModelMapper modelMapper;
 
@@ -62,5 +63,17 @@ public class VaccineService implements VaccineCRUD, ValidateVaccine {
 
         if (vaccineThatIsStillInEffect.isPresent())
             throw new VaccineInEffectException("Vaccine is still in effect!");
+    }
+
+    @Override
+    public List<Vaccine> filterVaccinesByAnimalId(Long animalId) {
+        return vaccineRepository.findByAnimalId(animalId);
+    }
+
+    @Override
+    public List<VaccineResponse> filterVaccineResponsesByAnimalId(Long animalId) {
+        return vaccineRepository.findByAnimalId(animalId)
+                .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
+                .toList();
     }
 }
