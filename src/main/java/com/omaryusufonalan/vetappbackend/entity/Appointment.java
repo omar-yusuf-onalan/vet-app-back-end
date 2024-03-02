@@ -25,4 +25,7 @@ public class Appointment {
 
     @ManyToOne
     private Doctor doctor;
+
+    @ManyToOne
+    private Animal animal;
 }
