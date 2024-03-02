@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.dto.animal;
 
+import com.omaryusufonalan.vetappbackend.dto.appointment.OnlyAppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.customer.OnlyCustomerResponse;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.OnlyVaccineResponse;
 import lombok.AllArgsConstructor;
@@ -32,4 +33,6 @@ public class AnimalResponse {
     private OnlyCustomerResponse customer;
 
     private List<OnlyVaccineResponse> vaccines;
+
+    private List<OnlyAppointmentResponse> appointments;
 }

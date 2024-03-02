@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.dto.doctor;
 
+import com.omaryusufonalan.vetappbackend.dto.appointment.OnlyAppointmentResponse;
 import com.omaryusufonalan.vetappbackend.dto.availabledate.OnlyAvailableDateResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,4 +27,6 @@ public class DoctorResponse {
     private String city;
 
     private List<OnlyAvailableDateResponse> availableDates;
+
+    private List<OnlyAppointmentResponse> appointments;
 }
