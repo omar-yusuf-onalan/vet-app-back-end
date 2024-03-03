@@ -1,6 +1,7 @@
 package com.omaryusufonalan.vetappbackend.dto.vaccine;
 
 import com.omaryusufonalan.vetappbackend.dto.animal.OnlyAnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.report.OnlyReportResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,4 +25,6 @@ public class VaccineResponse {
     private LocalDate protectionFinishDate;
 
     private OnlyAnimalResponse animal;
+
+    private OnlyReportResponse report;
 }
