@@ -26,4 +26,7 @@ public class Report {
 
     @OneToOne
     private Appointment appointment;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "report", cascade = CascadeType.REMOVE)
+    private List<Vaccine> vaccines;
 }
