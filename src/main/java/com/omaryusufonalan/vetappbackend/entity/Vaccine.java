@@ -31,4 +31,7 @@ public class Vaccine {
 
     @ManyToOne
     private Animal animal;
+
+    @ManyToOne
+    private Report report;
 }
