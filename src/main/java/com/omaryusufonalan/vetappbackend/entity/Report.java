@@ -23,4 +23,7 @@ public class Report {
     private String diagnosis;
 
     private double price;
+
+    @OneToOne
+    private Appointment appointment;
 }
