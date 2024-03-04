@@ -24,8 +24,8 @@ public class VaccineController {
         return new ResponseEntity<>(vaccineService.getVaccineResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<?> filterByAnimalId(@RequestParam("animal-id") Long animalId){
+    @GetMapping("filter-by-animal-id/{animalId}")
+    public ResponseEntity<?> filterByAnimalId(@PathVariable("animalId") Long animalId){
         return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
     }
 
