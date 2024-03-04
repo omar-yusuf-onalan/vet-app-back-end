@@ -10,13 +10,16 @@ import com.omaryusufonalan.vetappbackend.repository.CustomerRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerService implements CustomerCRUD, FilterCustomer, GetAnimal {
+public class CustomerService implements CustomerCRUD, FilterCustomer, GetAnimal, CustomerPage {
     private final CustomerRepository customerRepository;
     private final ModelMapper modelMapper;
 
@@ -73,5 +76,21 @@ public class CustomerService implements CustomerCRUD, FilterCustomer, GetAnimal 
     public List<AnimalResponse> getCustomerAnimalResponses(Long id) {
         return getCustomerById(id).getAnimals()
                 .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class)).toList();
+    }
+
+    @Override
+    public List<Customer> getCustomerPage(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Customer> customerPage = customerRepository.findAll(pageable);
+
+        return customerPage.stream().toList();
+    }
+
+    @Override
+    public List<CustomerResponse> getCustomerResponsePage(int page, int pageSize) {
+        return getCustomerPage(page, pageSize)
+                .stream().map(customer -> modelMapper.map(customer, CustomerResponse.class))
+                .toList();
     }
 }
