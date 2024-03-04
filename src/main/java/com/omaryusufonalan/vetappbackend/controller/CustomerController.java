@@ -33,6 +33,11 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerAnimalResponses(id), HttpStatus.OK);
     }
 
+    @GetMapping("/page")
+    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        return new ResponseEntity<>(customerService.getCustomerResponsePage(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CustomerCreateRequest customerSaveRequest) {
         return new ResponseEntity<>(customerService.createCustomer(customerSaveRequest), HttpStatus.CREATED);

@@ -22,6 +22,11 @@ public class ReportController {
         return new ResponseEntity<>(reportService.getReportResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/page")
+    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        return new ResponseEntity<>(reportService.getReportResponsePage(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody ReportCreateRequest reportSaveRequest) {
         return new ResponseEntity<>(reportService.createReport(reportSaveRequest), HttpStatus.CREATED);

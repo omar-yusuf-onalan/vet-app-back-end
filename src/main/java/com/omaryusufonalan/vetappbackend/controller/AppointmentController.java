@@ -50,6 +50,11 @@ public class AppointmentController {
         ), HttpStatus.OK);
     }
 
+    @GetMapping("/page")
+    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        return new ResponseEntity<>(appointmentService.getAppointmentResponsePage(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AppointmentCreateRequest appointmentSaveRequest) {
         return new ResponseEntity<>(appointmentService.createAppointment(appointmentSaveRequest), HttpStatus.CREATED);

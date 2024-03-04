@@ -22,6 +22,11 @@ public class AvailableDateController {
         return new ResponseEntity<>(availableDateService.getAvailableDateResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/page")
+    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        return new ResponseEntity<>(availableDateService.getAvailableDateResponsePage(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AvailableDateCreateRequest availableDateSaveRequest) {
         return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateSaveRequest), HttpStatus.CREATED);

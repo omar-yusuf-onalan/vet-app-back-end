@@ -22,6 +22,11 @@ public class DoctorController {
         return new ResponseEntity<>(doctorService.getDoctorResponseById(id), HttpStatus.OK);
     }
 
+    @GetMapping("/page")
+    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        return new ResponseEntity<>(doctorService.getDoctorResponsePage(page, pageSize), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody DoctorCreateRequest doctorSaveRequest) {
         return new ResponseEntity<>(doctorService.createDoctor(doctorSaveRequest), HttpStatus.CREATED);
