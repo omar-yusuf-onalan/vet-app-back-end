@@ -8,6 +8,9 @@ import com.omaryusufonalan.vetappbackend.repository.AvailableDateRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -15,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AvailableDateService implements AvailableDateCRUD, FilterAvailableDate {
+public class AvailableDateService implements AvailableDateCRUD, FilterAvailableDate, AvailableDatePage {
     private final AvailableDateRepository availableDateRepository;
     private final ModelMapper modelMapper;
 
@@ -63,6 +66,22 @@ public class AvailableDateService implements AvailableDateCRUD, FilterAvailableD
     ) {
         return availableDateRepository.findByDoctorIdAndAvailableDate(doctorId, availableDate)
                 .stream().map(object -> modelMapper.map(object, AvailableDateResponse.class))
+                .toList();
+    }
+
+    @Override
+    public List<AvailableDate> getAvailableDatePage(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<AvailableDate> availableDatePage = availableDateRepository.findAll(pageable);
+
+        return availableDatePage.stream().toList();
+    }
+
+    @Override
+    public List<AvailableDateResponse> getAvailableDateResponsePage(int page, int pageSize) {
+        return getAvailableDatePage(page, pageSize)
+                .stream().map(availableDate -> modelMapper.map(availableDate, AvailableDateResponse.class))
                 .toList();
     }
 }
