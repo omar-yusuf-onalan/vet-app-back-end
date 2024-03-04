@@ -8,11 +8,16 @@ import com.omaryusufonalan.vetappbackend.repository.ReportRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ReportService implements ReportCRUD {
+public class ReportService implements ReportCRUD, ReportPage {
     private final ReportRepository reportRepository;
     private final ModelMapper modelMapper;
     
@@ -46,5 +51,21 @@ public class ReportService implements ReportCRUD {
     @Override
     public void deleteReportById(Long id) {
         reportRepository.delete(getReportById(id));
+    }
+
+    @Override
+    public List<Report> getReportPage(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Report> reportPage = reportRepository.findAll(pageable);
+
+        return reportPage.stream().toList();
+    }
+
+    @Override
+    public List<ReportResponse> getReportResponsePage(int page, int pageSize) {
+        return getReportPage(page, pageSize)
+                .stream().map(report -> modelMapper.map(report, ReportResponse.class))
+                .toList();
     }
 }
