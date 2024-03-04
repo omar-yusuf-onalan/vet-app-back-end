@@ -23,8 +23,8 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<?> filterByName(@RequestParam("name") String name){
+    @GetMapping("/filter-by-name/{name}")
+    public ResponseEntity<?> filterByName(@PathVariable("name") String name){
         return new ResponseEntity<>(customerService.filterCustomerResponsesByName(name), HttpStatus.OK);
     }
 
