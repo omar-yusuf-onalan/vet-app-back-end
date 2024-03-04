@@ -9,8 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
