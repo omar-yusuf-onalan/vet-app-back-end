@@ -10,6 +10,9 @@ import com.omaryusufonalan.vetappbackend.service.availabledate.AvailableDateServ
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,7 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentService implements AppointmentCRUD, ValidateAppointment, FilterAppointment {
+public class AppointmentService implements AppointmentCRUD, ValidateAppointment, FilterAppointment, AppointmentPage {
     private final AppointmentRepository appointmentRepository;
     private final ModelMapper modelMapper;
     private final AvailableDateService availableDateService;
@@ -114,6 +117,22 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment,
     @Override
     public List<AppointmentResponse> filterAppointmentResponsesByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate) {
         return appointmentRepository.findByAnimalIdAndTwoDates(animalId, startDate, finishDate)
+                .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
+                .toList();
+    }
+
+    @Override
+    public List<Appointment> getAppointmentPage(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Appointment> appointmentPage = appointmentRepository.findAll(pageable);
+
+        return appointmentPage.stream().toList();
+    }
+
+    @Override
+    public List<AppointmentResponse> getAppointmentResponsePage(int page, int pageSize) {
+        return getAppointmentPage(page, pageSize)
                 .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
                 .toList();
     }
