@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
-@RequestMapping(BASE_URL + "/animals")
+@RequestMapping(BASE_URL + "animals")
 @RequiredArgsConstructor
 public class AnimalController {
     private final AnimalService animalService;
@@ -22,13 +22,16 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getAnimalResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<?> filterByName(@RequestParam("name") String name){
+    @GetMapping("filter-by-name/{name}")
+    public ResponseEntity<?> filterByName(@PathVariable("name") String name){
         return new ResponseEntity<>(animalService.filterAnimalResponsesByName(name), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+    @GetMapping
+    public ResponseEntity<?> getPage(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
+    ) {
         return new ResponseEntity<>(animalService.getAnimalResponsePage(page, pageSize), HttpStatus.OK);
     }
 

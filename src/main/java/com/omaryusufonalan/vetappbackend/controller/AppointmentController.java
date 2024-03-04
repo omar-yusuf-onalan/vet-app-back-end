@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
-@RequestMapping(BASE_URL + "/appointments")
+@RequestMapping(BASE_URL + "appointments")
 @RequiredArgsConstructor
 public class AppointmentController {
     private final AppointmentService appointmentService;
@@ -50,8 +50,11 @@ public class AppointmentController {
         ), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+    @GetMapping
+    public ResponseEntity<?> getPage(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
+    ) {
         return new ResponseEntity<>(appointmentService.getAppointmentResponsePage(page, pageSize), HttpStatus.OK);
     }
 

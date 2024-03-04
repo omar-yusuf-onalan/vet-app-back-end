@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
-@RequestMapping(BASE_URL + "/vaccines")
+@RequestMapping(BASE_URL + "vaccines")
 @RequiredArgsConstructor
 public class VaccineController {
     private final VaccineService vaccineService;
@@ -40,8 +40,11 @@ public class VaccineController {
         );
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+    @GetMapping
+    public ResponseEntity<?> getPage(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
+    ) {
         return new ResponseEntity<>(vaccineService.getVaccineResponsePage(page, pageSize), HttpStatus.OK);
     }
 

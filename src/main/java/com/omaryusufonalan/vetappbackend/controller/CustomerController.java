@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 
 @RestController
-@RequestMapping(BASE_URL + "/customers")
+@RequestMapping(BASE_URL + "customers")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
@@ -33,8 +33,11 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerAnimalResponses(id), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+    @GetMapping
+    public ResponseEntity<?> getPage(
+            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
+            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
+    ) {
         return new ResponseEntity<>(customerService.getCustomerResponsePage(page, pageSize), HttpStatus.OK);
     }
 
