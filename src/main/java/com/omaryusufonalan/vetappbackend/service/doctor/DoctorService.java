@@ -8,11 +8,16 @@ import com.omaryusufonalan.vetappbackend.repository.DoctorRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class DoctorService implements DoctorCRUD {
+public class DoctorService implements DoctorCRUD, DoctorPage {
     private final DoctorRepository doctorRepository;
     private final ModelMapper modelMapper;
 
@@ -46,5 +51,21 @@ public class DoctorService implements DoctorCRUD {
     @Override
     public void deleteDoctorById(Long id) {
         doctorRepository.delete(getDoctorById(id));
+    }
+
+    @Override
+    public List<Doctor> getDoctorPage(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+
+        Page<Doctor> doctorPage = doctorRepository.findAll(pageable);
+
+        return doctorPage.stream().toList();
+    }
+
+    @Override
+    public List<DoctorResponse> getDoctorResponsePage(int page, int pageSize) {
+        return getDoctorPage(page, pageSize)
+                .stream().map(doctor -> modelMapper.map(doctor, DoctorResponse.class))
+                .toList();
     }
 }
