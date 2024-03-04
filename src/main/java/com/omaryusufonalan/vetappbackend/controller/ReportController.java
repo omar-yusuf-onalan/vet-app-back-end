@@ -31,8 +31,8 @@ public class ReportController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody ReportCreateRequest reportSaveRequest) {
-        return new ResponseEntity<>(reportService.createReport(reportSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody ReportCreateRequest reportCreateRequest) {
+        return new ResponseEntity<>(reportService.createReport(reportCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

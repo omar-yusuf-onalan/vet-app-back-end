@@ -31,8 +31,8 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody DoctorCreateRequest doctorSaveRequest) {
-        return new ResponseEntity<>(doctorService.createDoctor(doctorSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody DoctorCreateRequest doctorCreateRequest) {
+        return new ResponseEntity<>(doctorService.createDoctor(doctorCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

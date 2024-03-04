@@ -49,8 +49,8 @@ public class VaccineController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody VaccineCreateRequest vaccineSaveRequest) {
-        return new ResponseEntity<>(vaccineService.createVaccine(vaccineSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody VaccineCreateRequest vaccineCreateRequest) {
+        return new ResponseEntity<>(vaccineService.createVaccine(vaccineCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

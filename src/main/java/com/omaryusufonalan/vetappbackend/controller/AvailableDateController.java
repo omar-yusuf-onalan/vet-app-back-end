@@ -31,8 +31,8 @@ public class AvailableDateController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AvailableDateCreateRequest availableDateSaveRequest) {
-        return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AvailableDateCreateRequest availableDateCreateRequest) {
+        return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

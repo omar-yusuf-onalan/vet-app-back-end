@@ -36,8 +36,8 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AnimalCreateRequest animalSaveRequest) {
-        return new ResponseEntity<>(animalService.createAnimal(animalSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AnimalCreateRequest animalCreateRequest) {
+        return new ResponseEntity<>(animalService.createAnimal(animalCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

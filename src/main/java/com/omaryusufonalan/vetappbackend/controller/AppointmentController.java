@@ -59,8 +59,8 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AppointmentCreateRequest appointmentSaveRequest) {
-        return new ResponseEntity<>(appointmentService.createAppointment(appointmentSaveRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AppointmentCreateRequest appointmentCreateRequest) {
+        return new ResponseEntity<>(appointmentService.createAppointment(appointmentCreateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping
