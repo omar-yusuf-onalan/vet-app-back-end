@@ -29,27 +29,27 @@ public class AppointmentController {
         return new ResponseEntity<>(appointmentService.getAppointmentResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/filter-by-doctor-id-and-two-dates/{doctorId}/{startDate}/{finishDate}")
-    public ResponseEntity<?> filterAppointmentResponsesByDoctorIdAndTwoDates(
-            @PathVariable("doctorId") Long doctorId,
+    @GetMapping("/filter-by-doctor-name-and-two-dates/{doctorName}/{startDate}/{finishDate}")
+    public ResponseEntity<?> filterAppointmentResponsesByDoctorNameAndTwoDates(
+            @PathVariable("doctorId") String doctorName,
             @PathVariable("startDate") LocalDate startDate,
             @PathVariable("finishDate") LocalDate finishDate
     ){
-        return new ResponseEntity<>(appointmentService.filterAppointmentResponsesByDoctorIdAndTwoDates(
-                doctorId,
+        return new ResponseEntity<>(appointmentService.filterAppointmentResponsesByDoctorNameAndTwoDates(
+                doctorName,
                 startDate,
                 finishDate
         ), HttpStatus.OK);
     }
 
-    @GetMapping("/filter-by-animal-id-and-two-dates/{doctorId}/{startDate}/{finishDate}")
-    public ResponseEntity<?> filterAppointmentResponsesByAnimalIdAndTwoDates(
-            @PathVariable("animalId") Long animalId,
+    @GetMapping("/filter-by-animal-name-and-two-dates/{animalName}/{startDate}/{finishDate}")
+    public ResponseEntity<?> filterAppointmentResponsesByAnimalNameAndTwoDates(
+            @PathVariable("animalName") String animalName,
             @PathVariable("startDate") LocalDate startDate,
             @PathVariable("finishDate") LocalDate finishDate
     ){
-        return new ResponseEntity<>(appointmentService.filterAppointmentResponsesByAnimalIdAndTwoDates(
-                animalId,
+        return new ResponseEntity<>(appointmentService.filterAppointmentResponsesByAnimalNameAndTwoDates(
+                animalName,
                 startDate,
                 finishDate
         ), HttpStatus.OK);

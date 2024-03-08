@@ -110,25 +110,25 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment,
     }
 
     @Override
-    public List<Appointment> filterAppointmentsByDoctorIdAndTwoDates(Long doctorId, LocalDate startDate, LocalDate finishDate) {
-        return appointmentRepository.findByDoctorIdAndTwoDates(doctorId, startDate, finishDate);
+    public List<Appointment> filterAppointmentsByDoctorNameAndTwoDates(String doctorName, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByDoctorNameAndTwoDates(doctorName, startDate, finishDate);
     }
 
     @Override
-    public List<AppointmentResponse> filterAppointmentResponsesByDoctorIdAndTwoDates(Long doctorId, LocalDate startDate, LocalDate finishDate) {
-        return appointmentRepository.findByDoctorIdAndTwoDates(doctorId, startDate, finishDate)
+    public List<AppointmentResponse> filterAppointmentResponsesByDoctorNameAndTwoDates(String doctorName, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByDoctorNameAndTwoDates(doctorName, startDate, finishDate)
                 .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
                 .toList();
     }
 
     @Override
-    public List<Appointment> filterAppointmentsByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate) {
-        return appointmentRepository.findByAnimalIdAndTwoDates(animalId, startDate, finishDate);
+    public List<Appointment> filterAppointmentsByAnimalNameAndTwoDates(String animalName, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByAnimalNameAndTwoDates(animalName, startDate, finishDate);
     }
 
     @Override
-    public List<AppointmentResponse> filterAppointmentResponsesByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate) {
-        return appointmentRepository.findByAnimalIdAndTwoDates(animalId, startDate, finishDate)
+    public List<AppointmentResponse> filterAppointmentResponsesByAnimalNameAndTwoDates(String animalName, LocalDate startDate, LocalDate finishDate) {
+        return appointmentRepository.findByAnimalNameAndTwoDates(animalName, startDate, finishDate)
                 .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
                 .toList();
     }
