@@ -22,6 +22,18 @@ public class DoctorService implements DoctorCRUD, DoctorPage {
     private final ModelMapper modelMapper;
 
     @Override
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
+
+    @Override
+    public List<DoctorResponse> getAllDoctorResponses() {
+        return getAllDoctors()
+                .stream().map(doctor -> modelMapper.map(doctor, DoctorResponse.class))
+                .toList();
+    }
+
+    @Override
     public Doctor getDoctorById(Long id) {
         return doctorRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Doctor with ID " + id + " not found!"));

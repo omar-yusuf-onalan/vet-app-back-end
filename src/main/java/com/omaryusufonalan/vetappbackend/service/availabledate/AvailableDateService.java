@@ -23,6 +23,18 @@ public class AvailableDateService implements AvailableDateCRUD, FilterAvailableD
     private final ModelMapper modelMapper;
 
     @Override
+    public List<AvailableDate> getAllAvailableDates() {
+        return availableDateRepository.findAll();
+    }
+
+    @Override
+    public List<AvailableDateResponse> getAllAvailableDateResponses() {
+        return getAllAvailableDates()
+                .stream().map(availableDate -> modelMapper.map(availableDate, AvailableDateResponse.class))
+                .toList();
+    }
+
+    @Override
     public AvailableDate getAvailableDateById(Long id) {
         return availableDateRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("AvailableDate with ID " + id + " not found!"));

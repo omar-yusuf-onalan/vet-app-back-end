@@ -22,6 +22,18 @@ public class AnimalService implements AnimalCRUD, FilterAnimal, AnimalPage {
     private final ModelMapper modelMapper;
 
     @Override
+    public List<Animal> getAllAnimals() {
+        return animalRepository.findAll();
+    }
+
+    @Override
+    public List<AnimalResponse> getAllAnimalResponses() {
+        return getAllAnimals()
+                .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class))
+                .toList();
+    }
+
+    @Override
     public Animal getAnimalById(Long id) {
         return animalRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Animal with ID " + id + " not found!"));

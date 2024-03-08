@@ -27,6 +27,18 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment,
     private final AvailableDateService availableDateService;
 
     @Override
+    public List<Appointment> getAllAppointments() {
+        return appointmentRepository.findAll();
+    }
+
+    @Override
+    public List<AppointmentResponse> getAllAppointmentResponses() {
+        return getAllAppointments()
+                .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
+                .toList();
+    }
+
+    @Override
     public Appointment getAppointmentById(Long id) {
         return appointmentRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Appointment with ID " + id + " not found!"));

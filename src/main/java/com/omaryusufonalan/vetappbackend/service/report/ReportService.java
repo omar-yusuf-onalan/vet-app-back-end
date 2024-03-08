@@ -20,7 +20,19 @@ import java.util.List;
 public class ReportService implements ReportCRUD, ReportPage {
     private final ReportRepository reportRepository;
     private final ModelMapper modelMapper;
-    
+
+    @Override
+    public List<Report> getAllReports() {
+        return reportRepository.findAll();
+    }
+
+    @Override
+    public List<ReportResponse> getAllReportResponses() {
+        return getAllReports()
+                .stream().map(report -> modelMapper.map(report, ReportResponse.class))
+                .toList();
+    }
+
     @Override
     public Report getReportById(Long id) {
         return reportRepository.findById(id)

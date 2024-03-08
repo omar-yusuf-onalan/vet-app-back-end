@@ -24,6 +24,18 @@ public class CustomerService implements CustomerCRUD, FilterCustomer, GetAnimal,
     private final ModelMapper modelMapper;
 
     @Override
+    public List<Customer> getAllCustomers() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public List<CustomerResponse> getAllCustomerResponses() {
+        return getAllCustomers()
+                .stream().map(customer -> modelMapper.map(customer, CustomerResponse.class))
+                .toList();
+    }
+
+    @Override
     public Customer getCustomerById(Long id) {
         return customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Customer with ID " + id + " not found!"));

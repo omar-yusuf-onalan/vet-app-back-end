@@ -25,6 +25,18 @@ public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVacci
     private final ModelMapper modelMapper;
 
     @Override
+    public List<Vaccine> getAllVaccines() {
+        return vaccineRepository.findAll();
+    }
+
+    @Override
+    public List<VaccineResponse> getAllVaccineResponses() {
+        return getAllVaccines()
+                .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
+                .toList();
+    }
+
+    @Override
     public Vaccine getVaccineById(Long id) {
         return vaccineRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Vaccine with ID " + id + " not found!"));
