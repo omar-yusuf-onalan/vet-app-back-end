@@ -18,6 +18,11 @@ import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 public class CustomerController {
     private final CustomerService customerService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(customerService.getAllCustomerResponses(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(customerService.getCustomerResponseById(id), HttpStatus.OK);
@@ -33,7 +38,7 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.getCustomerAnimalResponses(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize

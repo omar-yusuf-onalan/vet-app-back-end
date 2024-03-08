@@ -17,12 +17,17 @@ import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 public class DoctorController {
     private final DoctorService doctorService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(doctorService.getAllDoctorResponses(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(doctorService.getDoctorResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize

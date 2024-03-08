@@ -19,6 +19,11 @@ import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 public class VaccineController {
     private final VaccineService vaccineService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(vaccineService.getAllVaccineResponses(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(vaccineService.getVaccineResponseById(id), HttpStatus.OK);
@@ -40,7 +45,7 @@ public class VaccineController {
         );
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize

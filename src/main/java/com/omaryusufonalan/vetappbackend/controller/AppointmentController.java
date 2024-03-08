@@ -19,6 +19,11 @@ import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 public class AppointmentController {
     private final AppointmentService appointmentService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(appointmentService.getAllAppointmentResponses(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(appointmentService.getAppointmentResponseById(id), HttpStatus.OK);
@@ -50,7 +55,7 @@ public class AppointmentController {
         ), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize

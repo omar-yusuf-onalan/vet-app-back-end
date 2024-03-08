@@ -17,6 +17,11 @@ import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
 public class AnimalController {
     private final AnimalService animalService;
 
+    @GetMapping
+    public ResponseEntity<?> getAll() {
+        return new ResponseEntity<>(animalService.getAllAnimalResponses(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
         return new ResponseEntity<>(animalService.getAnimalResponseById(id), HttpStatus.OK);
@@ -27,7 +32,7 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.filterAnimalResponsesByName(name), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,
             @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
