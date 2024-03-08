@@ -94,6 +94,18 @@ public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVacci
     }
 
     @Override
+    public List<Vaccine> filterVaccinesByAnimalName(String animalName) {
+        return vaccineRepository.findByAnimalName(animalName);
+    }
+
+    @Override
+    public List<VaccineResponse> filterVaccineResponsesByAnimalName(String animalName) {
+        return filterVaccinesByAnimalName(animalName)
+                .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
+                .toList();
+    }
+
+    @Override
     public List<Vaccine> findAllVaccinesBetweenTwoDates(LocalDate startDate, LocalDate finishDate) {
         return vaccineRepository.findAllVaccinesBetweenTwoDates(startDate, finishDate);
     }

@@ -34,10 +34,15 @@ public class VaccineController {
         return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
     }
 
+    @GetMapping("filter-by-animal-name/{animalName}")
+    public ResponseEntity<?> filterByAnimalName(@PathVariable("animalName") String animalName){
+        return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalName(animalName), HttpStatus.OK);
+    }
+
     @GetMapping("/dates")
     public ResponseEntity<?> filterByTwoDates(
             @RequestParam("start-date") LocalDate startDate,
-            @RequestParam("finish-date")LocalDate finishDate
+            @RequestParam("finish-date") LocalDate finishDate
     ){
         return new ResponseEntity<>(
                 vaccineService.findAllVaccineResponsesBetweenTwoDates(startDate, finishDate),

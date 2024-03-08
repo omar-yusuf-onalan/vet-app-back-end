@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.repository;
 
+import com.omaryusufonalan.vetappbackend.entity.Animal;
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,10 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Long> {
     List<Vaccine> findByAnimalId(Long animalId);
     @Query(value = "SELECT * FROM vaccine WHERE protection_finish_date BETWEEN ?1 AND ?2", nativeQuery = true)
     List<Vaccine> findAllVaccinesBetweenTwoDates(LocalDate startDate, LocalDate finishDate);
+
+    @Query(value = "SELECT vaccine.*" +
+            " FROM vaccine" +
+            " INNER JOIN animal ON vaccine.animal_id = animal.id" +
+            " WHERE animal.name ILIKE %?1%", nativeQuery = true)
+    List<Vaccine> findByAnimalName(String animalName);
 }
