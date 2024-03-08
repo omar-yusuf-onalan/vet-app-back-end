@@ -13,10 +13,20 @@ import java.util.Optional;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
     Optional<Appointment> findByDoctorIdAndAppointmentDate(Long doctorId, LocalDateTime appointmentDate);
-    @Query(value = "SELECT * FROM appointment WHERE doctor_id = ?1 AND appointment_date BETWEEN ?2 AND ?3",
+    @Query(value = "SELECT appointment.*" +
+            " FROM appointment" +
+            " INNER JOIN doctor ON appointment.doctor_id = doctor.id" +
+            " WHERE doctor.name ILIKE %?1%" +
+            " AND" +
+            " appointment.appointment_date BETWEEN ?2 AND ?3",
             nativeQuery = true)
-    List<Appointment> findByDoctorIdAndTwoDates(Long doctorId, LocalDate startDate, LocalDate finishDate);
-    @Query(value = "SELECT * FROM appointment WHERE animal_id = ?1 AND appointment_date BETWEEN ?2 AND ?3",
+    List<Appointment> findByDoctorNameAndTwoDates(String doctorName, LocalDate startDate, LocalDate finishDate);
+    @Query(value = "SELECT appointment.*" +
+            " FROM appointment" +
+            " INNER JOIN animal ON appointment.animal_id = animal.id" +
+            " WHERE animal.name ILIKE %?1%" +
+            " AND" +
+            " appointment.appointment_date BETWEEN ?2 AND ?3",
             nativeQuery = true)
-    List<Appointment> findByAnimalIdAndTwoDates(Long animalId, LocalDate startDate, LocalDate finishDate);
+    List<Appointment> findByAnimalNameAndTwoDates(String animalName, LocalDate startDate, LocalDate finishDate);
 }

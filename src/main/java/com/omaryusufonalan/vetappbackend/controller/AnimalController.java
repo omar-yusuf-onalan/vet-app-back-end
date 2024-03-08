@@ -32,6 +32,11 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.filterAnimalResponsesByName(name), HttpStatus.OK);
     }
 
+    @GetMapping("filter-by-customer-name/{customerName}")
+    public ResponseEntity<?> filterByCustomerName(@PathVariable("customerName") String customerName){
+        return new ResponseEntity<>(animalService.getAnimalResponsesByCustomerName(customerName), HttpStatus.OK);
+    }
+
     @GetMapping("/page")
     public ResponseEntity<?> getPage(
             @RequestParam(name = "page", required = false, defaultValue = "0") int page,

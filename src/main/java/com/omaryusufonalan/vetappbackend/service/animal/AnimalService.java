@@ -78,6 +78,18 @@ public class AnimalService implements AnimalCRUD, FilterAnimal, AnimalPage {
     }
 
     @Override
+    public List<Animal> getAnimalsByCustomerName(String customerName) {
+        return animalRepository.findByCustomerName(customerName);
+    }
+
+    @Override
+    public List<AnimalResponse> getAnimalResponsesByCustomerName(String customerName) {
+        return getAnimalsByCustomerName(customerName)
+                .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class))
+                .toList();
+    }
+
+    @Override
     public List<Animal> getAnimalPage(int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
 
