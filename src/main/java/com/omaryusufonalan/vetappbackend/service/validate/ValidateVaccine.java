@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.service.vaccine;
+package com.omaryusufonalan.vetappbackend.service.validate;
 
 import com.omaryusufonalan.vetappbackend.entity.Vaccine;
 

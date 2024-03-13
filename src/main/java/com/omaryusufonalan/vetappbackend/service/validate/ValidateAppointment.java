@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.service.appointment;
+package com.omaryusufonalan.vetappbackend.service.validate;
 
 import com.omaryusufonalan.vetappbackend.entity.Appointment;
 
