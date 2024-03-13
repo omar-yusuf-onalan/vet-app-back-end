@@ -1,8 +1,8 @@
-package com.omaryusufonalan.vetappbackend.dto.animal;
+package com.omaryusufonalan.vetappbackend.dto.response;
 
-import com.omaryusufonalan.vetappbackend.dto.appointment.OnlyAppointmentResponse;
-import com.omaryusufonalan.vetappbackend.dto.customer.OnlyCustomerResponse;
-import com.omaryusufonalan.vetappbackend.dto.vaccine.OnlyVaccineResponse;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAppointmentDTO;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyCustomerDTO;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyVaccineDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,9 +30,9 @@ public class AnimalResponse {
 
     private LocalDate dateOfBirth;
 
-    private OnlyCustomerResponse customer;
+    private OnlyCustomerDTO customer;
 
-    private List<OnlyVaccineResponse> vaccines;
+    private List<OnlyVaccineDTO> vaccines;
 
-    private List<OnlyAppointmentResponse> appointments;
+    private List<OnlyAppointmentDTO> appointments;
 }

@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.dto.animal;
+package com.omaryusufonalan.vetappbackend.dto.only;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,18 +11,14 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OnlyAnimalResponse {
+public class OnlyVaccineDTO {
     private Long id;
 
     private String name;
 
-    private String species;
+    private String code;
 
-    private String breed;
+    private LocalDate protectionStartDate;
 
-    private String gender;
-
-    private String color;
-
-    private LocalDate dateOfBirth;
+    private LocalDate protectionFinishDate;
 }

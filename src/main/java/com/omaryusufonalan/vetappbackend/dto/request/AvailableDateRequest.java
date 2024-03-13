@@ -1,6 +1,6 @@
-package com.omaryusufonalan.vetappbackend.dto.availabledate;
+package com.omaryusufonalan.vetappbackend.dto.request;
 
-import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyDoctorDTO;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +13,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AvailableDateCreateRequest {
+public class AvailableDateRequest {
     @NotNull
     private LocalDate availableDate;
 
-    private DoctorUpdateRequest doctor;
+    private OnlyDoctorDTO doctor;
 }

@@ -1,8 +1,7 @@
-package com.omaryusufonalan.vetappbackend.dto.customer;
+package com.omaryusufonalan.vetappbackend.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CustomerUpdateRequest {
-    @Positive
-    private Long id;
-
+public class CustomerRequest {
     @NotBlank
     private String name;
 

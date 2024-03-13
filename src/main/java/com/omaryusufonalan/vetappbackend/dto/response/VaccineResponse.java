@@ -1,5 +1,7 @@
-package com.omaryusufonalan.vetappbackend.dto.vaccine;
+package com.omaryusufonalan.vetappbackend.dto.response;
 
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAnimalDTO;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyReportDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,9 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OnlyVaccineResponse {
-    private Long id;
-
+public class VaccineResponse {
     private String name;
 
     private String code;
@@ -21,4 +21,8 @@ public class OnlyVaccineResponse {
     private LocalDate protectionStartDate;
 
     private LocalDate protectionFinishDate;
+
+    private OnlyAnimalDTO animal;
+
+    private OnlyReportDTO report;
 }

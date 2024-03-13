@@ -1,6 +1,7 @@
-package com.omaryusufonalan.vetappbackend.dto.vaccine;
+package com.omaryusufonalan.vetappbackend.dto.request;
 
-import com.omaryusufonalan.vetappbackend.dto.animal.AnimalUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAnimalDTO;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyReportDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,7 +15,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class VaccineCreateRequest {
+public class VaccineRequest {
     @NotBlank
     private String name;
 
@@ -27,5 +28,7 @@ public class VaccineCreateRequest {
     @NotNull
     private LocalDate protectionFinishDate;
 
-    private AnimalUpdateRequest animal;
+    private OnlyAnimalDTO animal;
+
+    private OnlyReportDTO report;
 }

@@ -1,6 +1,6 @@
-package com.omaryusufonalan.vetappbackend.dto.customer;
+package com.omaryusufonalan.vetappbackend.dto.response;
 
-import com.omaryusufonalan.vetappbackend.dto.animal.OnlyAnimalResponse;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAnimalDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,5 +25,5 @@ public class CustomerResponse {
 
     private String city;
 
-    private List<OnlyAnimalResponse> animals;
+    private List<OnlyAnimalDTO> animals;
 }

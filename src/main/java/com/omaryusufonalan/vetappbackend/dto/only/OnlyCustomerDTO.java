@@ -1,7 +1,5 @@
-package com.omaryusufonalan.vetappbackend.dto.doctor;
+package com.omaryusufonalan.vetappbackend.dto.only;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,19 +9,16 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class DoctorCreateRequest {
-    @NotBlank
+public class OnlyCustomerDTO {
+    private Long id;
+
     private String name;
 
-    @NotBlank
     private String phone;
 
-    @Email
     private String email;
 
-    @NotBlank
     private String address;
 
-    @NotBlank
     private String city;
 }

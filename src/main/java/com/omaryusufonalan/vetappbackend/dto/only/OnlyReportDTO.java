@@ -1,4 +1,4 @@
-package com.omaryusufonalan.vetappbackend.dto.report;
+package com.omaryusufonalan.vetappbackend.dto.only;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class OnlyReportResponse {
+public class OnlyReportDTO {
     private Long id;
 
     private String title;

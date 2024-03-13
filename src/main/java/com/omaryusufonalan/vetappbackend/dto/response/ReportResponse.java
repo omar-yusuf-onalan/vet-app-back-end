@@ -1,7 +1,7 @@
-package com.omaryusufonalan.vetappbackend.dto.report;
+package com.omaryusufonalan.vetappbackend.dto.response;
 
-import com.omaryusufonalan.vetappbackend.dto.appointment.OnlyAppointmentResponse;
-import com.omaryusufonalan.vetappbackend.dto.vaccine.OnlyVaccineResponse;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAppointmentDTO;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyVaccineDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +22,7 @@ public class ReportResponse {
 
     private double price;
 
-    private OnlyAppointmentResponse appointment;
+    private OnlyAppointmentDTO appointment;
 
-    private List<OnlyVaccineResponse> vaccines;
+    private List<OnlyVaccineDTO> vaccines;
 }

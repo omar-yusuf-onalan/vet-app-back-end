@@ -1,6 +1,5 @@
-package com.omaryusufonalan.vetappbackend.dto.availabledate;
+package com.omaryusufonalan.vetappbackend.dto.only;
 
-import com.omaryusufonalan.vetappbackend.dto.doctor.OnlyDoctorResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +11,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AvailableDateResponse {
+public class OnlyAvailableDateDTO {
     private Long id;
 
     private LocalDate availableDate;
-
-    private OnlyDoctorResponse doctor;
 }

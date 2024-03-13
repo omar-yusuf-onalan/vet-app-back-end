@@ -1,8 +1,7 @@
-package com.omaryusufonalan.vetappbackend.dto.report;
+package com.omaryusufonalan.vetappbackend.dto.request;
 
-import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyAppointmentDTO;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ReportUpdateRequest {
-    @Positive
-    private Long id;
-
+public class ReportRequest {
     @NotBlank
     private String title;
 
@@ -26,5 +22,5 @@ public class ReportUpdateRequest {
     @PositiveOrZero
     private double price;
 
-    private AppointmentUpdateRequest appointment;
+    private OnlyAppointmentDTO appointment;
 }

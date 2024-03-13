@@ -1,6 +1,6 @@
-package com.omaryusufonalan.vetappbackend.dto.animal;
+package com.omaryusufonalan.vetappbackend.dto.request;
 
-import com.omaryusufonalan.vetappbackend.dto.customer.CustomerUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.only.OnlyCustomerDTO;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AnimalCreateRequest {
+public class AnimalRequest {
     @NotBlank
     private String name;
 
@@ -33,5 +33,5 @@ public class AnimalCreateRequest {
     @NotNull
     private LocalDate dateOfBirth;
 
-    private CustomerUpdateRequest customer;
+    private OnlyCustomerDTO customer;
 }
