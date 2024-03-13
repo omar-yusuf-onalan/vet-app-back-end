@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
+import com.omaryusufonalan.vetappbackend.core.EntityTemplate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Animal {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Animal extends EntityTemplate {
     private String name;
 
     private String species;
@@ -31,7 +28,7 @@ public class Animal {
 
     private LocalDate dateOfBirth;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Customer customer;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "animal", cascade = CascadeType.REMOVE)

@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
+import com.omaryusufonalan.vetappbackend.core.EntityTemplate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,11 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Doctor {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class Doctor extends EntityTemplate {
     private String name;
 
     @Column(unique = true)

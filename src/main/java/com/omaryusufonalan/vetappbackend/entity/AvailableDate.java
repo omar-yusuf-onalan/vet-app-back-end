@@ -1,5 +1,6 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
+import com.omaryusufonalan.vetappbackend.core.EntityTemplate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,11 +17,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AvailableDate {
-    @Id
-    @GeneratedValue
-    private Long id;
-
+public class AvailableDate extends EntityTemplate {
     private LocalDate availableDate;
 
     @ManyToOne
