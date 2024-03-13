@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.AppointmentRequest;
 import com.omaryusufonalan.vetappbackend.service.appointment.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -56,8 +56,8 @@ public class AppointmentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AppointmentCreateRequest appointmentCreateRequest) {
-        return new ResponseEntity<>(appointmentService.createAppointment(appointmentCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AppointmentRequest appointmentRequest) {
+        return new ResponseEntity<>(appointmentService.createAppointment(appointmentRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

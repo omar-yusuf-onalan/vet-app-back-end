@@ -1,8 +1,8 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
 
-import com.omaryusufonalan.vetappbackend.dto.customer.CustomerCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.customer.CustomerUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.CustomerRequest;
 import com.omaryusufonalan.vetappbackend.service.customer.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +39,8 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody CustomerCreateRequest customerCreateRequest) {
-        return new ResponseEntity<>(customerService.createCustomer(customerCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody CustomerRequest customerRequest) {
+        return new ResponseEntity<>(customerService.createCustomer(customerRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

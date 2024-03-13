@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.animal.AnimalCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.animal.AnimalUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.AnimalRequest;
 import com.omaryusufonalan.vetappbackend.service.animal.AnimalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -38,8 +38,8 @@ public class AnimalController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AnimalCreateRequest animalCreateRequest) {
-        return new ResponseEntity<>(animalService.createAnimal(animalCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AnimalRequest animalRequest) {
+        return new ResponseEntity<>(animalService.createAnimal(animalRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

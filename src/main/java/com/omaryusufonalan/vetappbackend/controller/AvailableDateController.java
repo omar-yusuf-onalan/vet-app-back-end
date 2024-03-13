@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.AvailableDateRequest;
 import com.omaryusufonalan.vetappbackend.service.availabledate.AvailableDateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,8 @@ public class AvailableDateController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody AvailableDateCreateRequest availableDateCreateRequest) {
-        return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody AvailableDateRequest availableDateRequest) {
+        return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

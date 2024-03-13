@@ -1,6 +1,6 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineCreateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.VaccineRequest;
 import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineUpdateRequest;
 import com.omaryusufonalan.vetappbackend.service.vaccine.VaccineService;
 import jakarta.validation.Valid;
@@ -51,8 +51,8 @@ public class VaccineController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody VaccineCreateRequest vaccineCreateRequest) {
-        return new ResponseEntity<>(vaccineService.createVaccine(vaccineCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody VaccineRequest vaccineRequest) {
+        return new ResponseEntity<>(vaccineService.createVaccine(vaccineRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

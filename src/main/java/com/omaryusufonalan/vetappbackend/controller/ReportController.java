@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.report.ReportCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.report.ReportUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.ReportRequest;
 import com.omaryusufonalan.vetappbackend.service.report.ReportService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,8 @@ public class ReportController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody ReportCreateRequest reportCreateRequest) {
-        return new ResponseEntity<>(reportService.createReport(reportCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody ReportRequest reportRequest) {
+        return new ResponseEntity<>(reportService.createReport(reportRequest), HttpStatus.CREATED);
     }
 
     @PutMapping

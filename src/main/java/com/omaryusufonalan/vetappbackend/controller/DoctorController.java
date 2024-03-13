@@ -1,7 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorCreateRequest;
 import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorUpdateRequest;
+import com.omaryusufonalan.vetappbackend.dto.request.DoctorRequest;
 import com.omaryusufonalan.vetappbackend.service.doctor.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +28,8 @@ public class DoctorController {
     }
 
     @PostMapping
-    public ResponseEntity<?> create(@Valid @RequestBody DoctorCreateRequest doctorCreateRequest) {
-        return new ResponseEntity<>(doctorService.createDoctor(doctorCreateRequest), HttpStatus.CREATED);
+    public ResponseEntity<?> create(@Valid @RequestBody DoctorRequest doctorRequest) {
+        return new ResponseEntity<>(doctorService.createDoctor(doctorRequest), HttpStatus.CREATED);
     }
 
     @PutMapping
