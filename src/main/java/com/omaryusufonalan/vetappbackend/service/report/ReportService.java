@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ReportService implements ReportCRUD, ReportPage {
+public class ReportService implements ReportCRUD {
     private final ReportRepository reportRepository;
     private final ModelMapper modelMapper;
 
@@ -63,21 +63,5 @@ public class ReportService implements ReportCRUD, ReportPage {
     @Override
     public void deleteReportById(Long id) {
         reportRepository.delete(getReportById(id));
-    }
-
-    @Override
-    public List<Report> getReportPage(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-
-        Page<Report> reportPage = reportRepository.findAll(pageable);
-
-        return reportPage.stream().toList();
-    }
-
-    @Override
-    public List<ReportResponse> getReportResponsePage(int page, int pageSize) {
-        return getReportPage(page, pageSize)
-                .stream().map(report -> modelMapper.map(report, ReportResponse.class))
-                .toList();
     }
 }

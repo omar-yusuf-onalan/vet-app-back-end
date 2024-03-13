@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVaccine, VaccinePage {
+public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVaccine {
     private final VaccineRepository vaccineRepository;
     private final ModelMapper modelMapper;
 
@@ -113,22 +113,6 @@ public class VaccineService implements VaccineCRUD, ValidateVaccine, FilterVacci
     @Override
     public List<VaccineResponse> findAllVaccineResponsesBetweenTwoDates(LocalDate startDate, LocalDate finishDate) {
         return vaccineRepository.findAllVaccinesBetweenTwoDates(startDate, finishDate)
-                .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
-                .toList();
-    }
-
-    @Override
-    public List<Vaccine> getVaccinePage(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-
-        Page<Vaccine> vaccinePage = vaccineRepository.findAll(pageable);
-
-        return vaccinePage.stream().toList();
-    }
-
-    @Override
-    public List<VaccineResponse> getVaccineResponsePage(int page, int pageSize) {
-        return getVaccinePage(page, pageSize)
                 .stream().map(vaccine -> modelMapper.map(vaccine, VaccineResponse.class))
                 .toList();
     }

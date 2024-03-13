@@ -21,7 +21,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AppointmentService implements AppointmentCRUD, ValidateAppointment, FilterAppointment, AppointmentPage {
+public class AppointmentService implements AppointmentCRUD, ValidateAppointment, FilterAppointment {
     private final AppointmentRepository appointmentRepository;
     private final ModelMapper modelMapper;
     private final AvailableDateService availableDateService;
@@ -129,22 +129,6 @@ public class AppointmentService implements AppointmentCRUD, ValidateAppointment,
     @Override
     public List<AppointmentResponse> filterAppointmentResponsesByAnimalNameAndTwoDates(String animalName, LocalDate startDate, LocalDate finishDate) {
         return appointmentRepository.findByAnimalNameAndTwoDates(animalName, startDate, finishDate)
-                .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
-                .toList();
-    }
-
-    @Override
-    public List<Appointment> getAppointmentPage(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-
-        Page<Appointment> appointmentPage = appointmentRepository.findAll(pageable);
-
-        return appointmentPage.stream().toList();
-    }
-
-    @Override
-    public List<AppointmentResponse> getAppointmentResponsePage(int page, int pageSize) {
-        return getAppointmentPage(page, pageSize)
                 .stream().map(appointment -> modelMapper.map(appointment, AppointmentResponse.class))
                 .toList();
     }

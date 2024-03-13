@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AnimalService implements AnimalCRUD, FilterAnimal, AnimalPage {
+public class AnimalService implements AnimalCRUD, FilterAnimal {
     private final AnimalRepository animalRepository;
     private final ModelMapper modelMapper;
 
@@ -55,9 +55,14 @@ public class AnimalService implements AnimalCRUD, FilterAnimal, AnimalPage {
     public AnimalResponse updateAnimal(AnimalUpdateRequest animalUpdateRequest) {
         Animal doesAnimalExist = getAnimalById(animalUpdateRequest.getId());
 
-        modelMapper.map(animalUpdateRequest, doesAnimalExist);
+        Animal updateAnimal =  modelMapper
+                .map(animalUpdateRequest, Animal.class);
 
-        return modelMapper.map(animalRepository.save(doesAnimalExist), AnimalResponse.class);
+        modelMapper
+                .map(updateAnimal, doesAnimalExist);
+
+        return modelMapper
+                .map(animalRepository.save(doesAnimalExist), AnimalResponse.class);
     }
 
     @Override
@@ -85,22 +90,6 @@ public class AnimalService implements AnimalCRUD, FilterAnimal, AnimalPage {
     @Override
     public List<AnimalResponse> getAnimalResponsesByCustomerName(String customerName) {
         return getAnimalsByCustomerName(customerName)
-                .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class))
-                .toList();
-    }
-
-    @Override
-    public List<Animal> getAnimalPage(int page, int pageSize) {
-        Pageable pageable = PageRequest.of(page, pageSize);
-
-        Page<Animal> animalPage = animalRepository.findAll(pageable);
-
-        return animalPage.stream().toList();
-    }
-
-    @Override
-    public List<AnimalResponse> getAnimalResponsePage(int page, int pageSize) {
-        return getAnimalPage(page, pageSize)
                 .stream().map(animal -> modelMapper.map(animal, AnimalResponse.class))
                 .toList();
     }
