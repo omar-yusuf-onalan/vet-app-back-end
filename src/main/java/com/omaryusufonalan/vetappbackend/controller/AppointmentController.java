@@ -1,8 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.appointment.AppointmentUpdateRequest;
 import com.omaryusufonalan.vetappbackend.dto.request.AppointmentRequest;
-import com.omaryusufonalan.vetappbackend.service.appointment.AppointmentService;
+import com.omaryusufonalan.vetappbackend.service.AppointmentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,12 +20,12 @@ public class AppointmentController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(appointmentService.getAllAppointmentResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(appointmentService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(appointmentService.getAppointmentResponseById(id), HttpStatus.OK);
+        return new ResponseEntity<>(appointmentService.getResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping("/filter-by-doctor-name-and-two-dates/{doctorName}/{startDate}/{finishDate}")
@@ -57,17 +56,20 @@ public class AppointmentController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AppointmentRequest appointmentRequest) {
-        return new ResponseEntity<>(appointmentService.createAppointment(appointmentRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(appointmentService.create(appointmentRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody AppointmentUpdateRequest appointmentUpdateRequest){
-        return new ResponseEntity<>(appointmentService.updateAppointment(appointmentUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("/{id}") Long id,
+            @Valid @RequestBody AppointmentRequest appointmentRequest
+    ){
+        return new ResponseEntity<>(appointmentService.update(id, appointmentRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        appointmentService.deleteAppointmentById(id);
+        appointmentService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

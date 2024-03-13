@@ -1,8 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
 import com.omaryusufonalan.vetappbackend.dto.request.VaccineRequest;
-import com.omaryusufonalan.vetappbackend.dto.vaccine.VaccineUpdateRequest;
-import com.omaryusufonalan.vetappbackend.service.vaccine.VaccineService;
+import com.omaryusufonalan.vetappbackend.service.VaccineService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,17 +20,12 @@ public class VaccineController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(vaccineService.getAllVaccineResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(vaccineService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(vaccineService.getVaccineResponseById(id), HttpStatus.OK);
-    }
-
-    @GetMapping("filter-by-animal-id/{animalId}")
-    public ResponseEntity<?> filterByAnimalId(@PathVariable("animalId") Long animalId){
-        return new ResponseEntity<>(vaccineService.filterVaccineResponsesByAnimalId(animalId), HttpStatus.OK);
+        return new ResponseEntity<>(vaccineService.getResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping("filter-by-animal-name/{animalName}")
@@ -52,17 +46,20 @@ public class VaccineController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody VaccineRequest vaccineRequest) {
-        return new ResponseEntity<>(vaccineService.createVaccine(vaccineRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(vaccineService.create(vaccineRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody VaccineUpdateRequest vaccineUpdateRequest){
-        return new ResponseEntity<>(vaccineService.updateVaccine(vaccineUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody VaccineRequest vaccineRequest
+    ){
+        return new ResponseEntity<>(vaccineService.update(id, vaccineRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        vaccineService.deleteVaccineById(id);
+        vaccineService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

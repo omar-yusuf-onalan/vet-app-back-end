@@ -1,8 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.animal.AnimalUpdateRequest;
 import com.omaryusufonalan.vetappbackend.dto.request.AnimalRequest;
-import com.omaryusufonalan.vetappbackend.service.animal.AnimalService;
+import com.omaryusufonalan.vetappbackend.service.AnimalService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,12 +18,12 @@ public class AnimalController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(animalService.getAllAnimalResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(animalService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(animalService.getAnimalResponseById(id), HttpStatus.OK);
+        return new ResponseEntity<>(animalService.getResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping("filter-by-name/{name}")
@@ -39,17 +38,20 @@ public class AnimalController {
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AnimalRequest animalRequest) {
-        return new ResponseEntity<>(animalService.createAnimal(animalRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(animalService.create(animalRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody AnimalUpdateRequest animalUpdateRequest){
-        return new ResponseEntity<>(animalService.updateAnimal(animalUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody AnimalRequest animalRequest
+    ){
+        return new ResponseEntity<>(animalService.update(id, animalRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        animalService.deleteAnimalById(id);
+        animalService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

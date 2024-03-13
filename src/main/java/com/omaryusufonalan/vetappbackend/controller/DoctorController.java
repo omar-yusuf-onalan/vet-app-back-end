@@ -1,8 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.doctor.DoctorUpdateRequest;
 import com.omaryusufonalan.vetappbackend.dto.request.DoctorRequest;
-import com.omaryusufonalan.vetappbackend.service.doctor.DoctorService;
+import com.omaryusufonalan.vetappbackend.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,27 +18,30 @@ public class DoctorController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(doctorService.getAllDoctorResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(doctorService.getDoctorResponseById(id), HttpStatus.OK);
+        return new ResponseEntity<>(doctorService.getResponseById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody DoctorRequest doctorRequest) {
-        return new ResponseEntity<>(doctorService.createDoctor(doctorRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(doctorService.create(doctorRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody DoctorUpdateRequest doctorUpdateRequest){
-        return new ResponseEntity<>(doctorService.updateDoctor(doctorUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody DoctorRequest doctorRequest
+    ){
+        return new ResponseEntity<>(doctorService.update(id, doctorRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        doctorService.deleteDoctorById(id);
+        doctorService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

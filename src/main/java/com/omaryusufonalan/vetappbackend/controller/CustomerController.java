@@ -1,9 +1,8 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
 
-import com.omaryusufonalan.vetappbackend.dto.customer.CustomerUpdateRequest;
 import com.omaryusufonalan.vetappbackend.dto.request.CustomerRequest;
-import com.omaryusufonalan.vetappbackend.service.customer.CustomerService;
+import com.omaryusufonalan.vetappbackend.service.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,12 +19,12 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(customerService.getAllCustomerResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(customerService.getCustomerResponseById(id), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.getResponseById(id), HttpStatus.OK);
     }
 
     @GetMapping("/filter-by-name/{name}")
@@ -33,24 +32,22 @@ public class CustomerController {
         return new ResponseEntity<>(customerService.filterCustomerResponsesByName(name), HttpStatus.OK);
     }
 
-    @GetMapping("animals/{id}")
-    public ResponseEntity<?> getAnimals(@PathVariable("id") Long id) {
-        return new ResponseEntity<>(customerService.getCustomerAnimalResponses(id), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody CustomerRequest customerRequest) {
-        return new ResponseEntity<>(customerService.createCustomer(customerRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(customerService.create(customerRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody CustomerUpdateRequest customerUpdateRequest){
-        return new ResponseEntity<>(customerService.updateCustomer(customerUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody CustomerRequest customerRequest
+    ){
+        return new ResponseEntity<>(customerService.update(id, customerRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        customerService.deleteCustomerById(id);
+        customerService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

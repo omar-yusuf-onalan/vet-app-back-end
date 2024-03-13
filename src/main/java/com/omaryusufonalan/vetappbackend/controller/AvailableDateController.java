@@ -1,8 +1,7 @@
 package com.omaryusufonalan.vetappbackend.controller;
 
-import com.omaryusufonalan.vetappbackend.dto.availabledate.AvailableDateUpdateRequest;
 import com.omaryusufonalan.vetappbackend.dto.request.AvailableDateRequest;
-import com.omaryusufonalan.vetappbackend.service.availabledate.AvailableDateService;
+import com.omaryusufonalan.vetappbackend.service.AvailableDateService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,27 +18,30 @@ public class AvailableDateController {
 
     @GetMapping
     public ResponseEntity<?> getAll() {
-        return new ResponseEntity<>(availableDateService.getAllAvailableDateResponses(), HttpStatus.OK);
+        return new ResponseEntity<>(availableDateService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getById(@PathVariable("id") Long id){
-        return new ResponseEntity<>(availableDateService.getAvailableDateResponseById(id), HttpStatus.OK);
+        return new ResponseEntity<>(availableDateService.getResponseById(id), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AvailableDateRequest availableDateRequest) {
-        return new ResponseEntity<>(availableDateService.createAvailableDate(availableDateRequest), HttpStatus.CREATED);
+        return new ResponseEntity<>(availableDateService.create(availableDateRequest), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<?> update(@Valid @RequestBody AvailableDateUpdateRequest availableDateUpdateRequest){
-        return new ResponseEntity<>(availableDateService.updateAvailableDate(availableDateUpdateRequest),HttpStatus.ACCEPTED);
+    @PutMapping("/{id}")
+    public ResponseEntity<?> update(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody AvailableDateRequest availableDateRequest
+    ){
+        return new ResponseEntity<>(availableDateService.update(id, availableDateRequest),HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable("id") Long id) {
-        availableDateService.deleteAvailableDateById(id);
+        availableDateService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
