@@ -31,7 +31,7 @@ public class AppointmentController {
 
     @GetMapping("/filter-by-doctor-name-and-two-dates/{doctorName}/{startDate}/{finishDate}")
     public ResponseEntity<?> filterAppointmentResponsesByDoctorNameAndTwoDates(
-            @PathVariable("doctorId") String doctorName,
+            @PathVariable("doctorName") String doctorName,
             @PathVariable("startDate") LocalDate startDate,
             @PathVariable("finishDate") LocalDate finishDate
     ){
@@ -53,14 +53,6 @@ public class AppointmentController {
                 startDate,
                 finishDate
         ), HttpStatus.OK);
-    }
-
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(
-            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
-    ) {
-        return new ResponseEntity<>(appointmentService.getAppointmentResponsePage(page, pageSize), HttpStatus.OK);
     }
 
     @PostMapping

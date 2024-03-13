@@ -50,14 +50,6 @@ public class VaccineController {
         );
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(
-            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
-    ) {
-        return new ResponseEntity<>(vaccineService.getVaccineResponsePage(page, pageSize), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody VaccineCreateRequest vaccineCreateRequest) {
         return new ResponseEntity<>(vaccineService.createVaccine(vaccineCreateRequest), HttpStatus.CREATED);

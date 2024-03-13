@@ -27,14 +27,6 @@ public class ReportController {
         return new ResponseEntity<>(reportService.getReportResponseById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(
-            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
-    ) {
-        return new ResponseEntity<>(reportService.getReportResponsePage(page, pageSize), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody ReportCreateRequest reportCreateRequest) {
         return new ResponseEntity<>(reportService.createReport(reportCreateRequest), HttpStatus.CREATED);

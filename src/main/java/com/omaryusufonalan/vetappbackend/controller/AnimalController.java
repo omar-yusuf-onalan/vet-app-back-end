@@ -37,14 +37,6 @@ public class AnimalController {
         return new ResponseEntity<>(animalService.getAnimalResponsesByCustomerName(customerName), HttpStatus.OK);
     }
 
-    @GetMapping("/page")
-    public ResponseEntity<?> getPage(
-            @RequestParam(name = "page", required = false, defaultValue = "0") int page,
-            @RequestParam(name = "page-size", required = false, defaultValue = "10") int pageSize
-    ) {
-        return new ResponseEntity<>(animalService.getAnimalResponsePage(page, pageSize), HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity<?> create(@Valid @RequestBody AnimalCreateRequest animalCreateRequest) {
         return new ResponseEntity<>(animalService.createAnimal(animalCreateRequest), HttpStatus.CREATED);
