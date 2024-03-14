@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class VaccineResponse {
+    private Long id;
+
     private String name;
 
     private String code;
