@@ -61,7 +61,7 @@ public class AppointmentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> update(
-            @PathVariable("/{id}") Long id,
+            @PathVariable("id") Long id,
             @Valid @RequestBody AppointmentRequest appointmentRequest
     ){
         return new ResponseEntity<>(appointmentService.update(id, appointmentRequest),HttpStatus.ACCEPTED);
