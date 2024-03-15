@@ -1,10 +1,7 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
 import com.omaryusufonalan.vetappbackend.core.EntityTemplate;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,12 +19,16 @@ public class Vaccine extends EntityTemplate {
     @GeneratedValue
     private Long id;
 
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String code;
 
+    @Column(nullable = false)
     private LocalDate protectionStartDate;
 
+    @Column(nullable = false)
     private LocalDate protectionFinishDate;
 
     @ManyToOne

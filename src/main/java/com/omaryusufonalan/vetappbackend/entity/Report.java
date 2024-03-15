@@ -15,10 +15,13 @@ import java.util.List;
 @Getter
 @Setter
 public class Report extends EntityTemplate {
+    @Column(nullable = false)
     private String title;
 
+    @Column(nullable = false)
     private String diagnosis;
 
+    @Column(nullable = false)
     private double price;
 
     @OneToOne

@@ -16,16 +16,22 @@ import java.util.List;
 @Getter
 @Setter
 public class Animal extends EntityTemplate {
+    @Column(nullable = false)
     private String name;
 
+    @Column(nullable = false)
     private String species;
 
+    @Column(nullable = false)
     private String breed;
 
+    @Column(nullable = false)
     private String gender;
 
+    @Column(nullable = false)
     private String color;
 
+    @Column(nullable = false)
     private LocalDate dateOfBirth;
 
     @ManyToOne(fetch = FetchType.EAGER)

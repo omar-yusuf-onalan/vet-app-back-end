@@ -1,6 +1,7 @@
 package com.omaryusufonalan.vetappbackend.entity;
 
 import com.omaryusufonalan.vetappbackend.core.EntityTemplate;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class AvailableDate extends EntityTemplate {
+    @Column(nullable = false)
     private LocalDate availableDate;
 
     @ManyToOne

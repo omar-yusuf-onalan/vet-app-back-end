@@ -15,16 +15,19 @@ import java.util.List;
 @Getter
 @Setter
 public class Customer extends EntityTemplate {
+    @Column(nullable = false)
     private String name;
 
     @Column(unique = true)
     private String phone;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
     private String address;
 
+    @Column(nullable = false)
     private String city;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer", cascade = CascadeType.REMOVE)

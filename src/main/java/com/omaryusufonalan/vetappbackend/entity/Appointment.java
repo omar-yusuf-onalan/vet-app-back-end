@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Appointment extends EntityTemplate {
+    @Column(nullable = false)
     private LocalDateTime appointmentDate;
 
     @ManyToOne
