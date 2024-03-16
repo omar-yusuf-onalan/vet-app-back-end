@@ -9,10 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
-
 @RestController
-@RequestMapping(BASE_URL + "customers")
+@RequestMapping("customers")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;

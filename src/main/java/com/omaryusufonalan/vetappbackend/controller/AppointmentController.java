@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
-import static com.omaryusufonalan.vetappbackend.config.BaseURL.BASE_URL;
-
 @RestController
-@RequestMapping(BASE_URL + "appointments")
+@RequestMapping("appointments")
 @RequiredArgsConstructor
 public class AppointmentController {
     private final AppointmentService appointmentService;
