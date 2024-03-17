@@ -68,7 +68,7 @@ public class VaccineService implements ServiceTemplate<Vaccine, VaccineRequest, 
     @Override
     public void validateVaccine(Vaccine vaccine) {
         Optional<Vaccine> vaccineThatIsStillInEffect = vaccineRepository
-                .validateVaccine(vaccine.getCode(), vaccine.getProtectionStartDate());
+                .validateVaccine(vaccine.getCode(), vaccine.getProtectionStartDate(), vaccine.getAnimal().getId());
 
         if (vaccineThatIsStillInEffect.isPresent())
             throw new VaccineInEffectException("Vaccine is still in effect!");
